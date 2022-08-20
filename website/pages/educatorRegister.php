@@ -1,3 +1,57 @@
+<?php
+    require("database.php");
+    session_start();
+
+    if(isset($_POST['submit'])) {
+
+        // grab data from form
+        $name = $_POST['name'];
+        $name = stripslashes($name);
+        $name = mysqli_real_escape_string($con,$name);
+
+        $mail = $_POST['email'];
+        $mail = stripslashes($mail);
+        $mail = mysqli_real_escape_string($con,$mail);
+
+        $pass = $_POST['password'];
+        $pass = stripslashes($pass);
+        $pass = mysqli_real_escape_string($con,$pass);
+
+        $code = $_POST['code'];
+        $code = stripslashes($code);
+        $code = mysqli_real_escape_string($con,$code);
+
+        // check if email already in db
+        $qr = "SELECT email from educator where email='$mail'";
+        $result = mysqli_query($con,$qr);
+
+        // check if code already in use
+        $qr = "SELECT code from educator_code where code='$code'";
+        $result2 = mysqli_query($con,$qr);
+
+        if(mysqli_num_rows($result) > 0) {
+            echo "<script>alert('The email is already registered.')</script>";
+            mysqli_free_result($result);
+        }
+
+        elseif (mysqli_num_rows($result2) > 0) {
+            echo "<script>alert('The code is already in use.')</script>";
+            mysqli_free_result($result2);
+        }
+
+        else {
+            mysqli_free_result($result);
+            mysqli_free_result($result2);
+            $qr = "INSERT INTO educator (email,name,password) VALUES ('$mail','$name','$pass')";
+            mysqli_query($con,$qr);
+            $qr = "INSERT INTO educator_code (email,code) VALUES ('$mail','$code')";
+            mysqli_query($con,$qr);
+            echo "<script>alert('Account registered successfully.')</script>";
+            header("location: educatorLogin.php");
+        }
+    }
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -29,8 +83,8 @@
                   Login
                   </a>
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                     <li><a class="dropdown-item" href="studentLogin.html">Student login</a></li>
-                     <li><a class="dropdown-item" href="educatorLogin.html">Educator login</a></li>
+                     <li><a class="dropdown-item" href="studentLogin.php">Student login</a></li>
+                     <li><a class="dropdown-item" href="educatorLogin.php">Educator login</a></li>
                   </ul>
                <li class="nav-item">
                   <a class="nav-link" href="about.html">About</a>
@@ -41,27 +95,27 @@
 
 
       <!-- content -->
-      <form class="form-signin w-100 m-auto">
+      <form class="form-signin w-100 m-auto" method="post" action="<?php echo $_SERVER['PHP_SELF'];  ?>" enctype="multipart/form-data">
          <h1 class="h3 mb-3 fw-normal">Educator registration</h1>
          <div class="form-floating">
-            <input type="text" class="form-control" id="floatingInput" placeholder="Name" required>
+            <input type="text" class="form-control" id="floatingInput" placeholder="Name" name="name" required>
             <label class="text-muted" for="floatingInput">Name</label>
          </div>
          <div class="form-floating">
-            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" required>
+            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="email" required>
             <label class="text-muted" for="floatingInput">Email address</label>
          </div>
          <div class="form-floating">
-            <input type="password" class="form-control" id="floatingPassword" placeholder="Password" required>
+            <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password" required>
             <label class="text-muted" for="floatingPassword">Password</label>
          </div>
          <div class="form-floating">
-            <input type="text" class="form-control" id="floatingInput" placeholder="Code" required>
+            <input type="text" class="form-control" id="floatingInput" placeholder="Code" name="code" required>
             <label class="text-muted" for="floatingInput">Code</label>
          </div>
-         <button class="w-100 btn btn-lg btn-primary" type="submit">Register</button>
+         <button class="w-100 btn btn-lg btn-primary" type="submit" name="submit">Register</button>
       </form>
-      <h5 align="center"><a href="educatorLogin.html">Already have an account? Login here</a></h5>
+      <h5 align="center"><a href="educatorLogin.php">Already have an account? Login here</a></h5>
 
 
 
