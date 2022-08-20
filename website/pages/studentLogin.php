@@ -29,8 +29,8 @@
                   Login
                   </a>
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                     <li><a class="dropdown-item" href="studentLogin.html">Student login</a></li>
-                     <li><a class="dropdown-item" href="educatorLogin.html">Educator login</a></li>
+                     <li><a class="dropdown-item" href="studentLogin.php">Student login</a></li>
+                     <li><a class="dropdown-item" href="educatorLogin.php">Educator login</a></li>
                   </ul>
                <li class="nav-item">
                   <a class="nav-link" href="about.html">About</a>
@@ -53,7 +53,7 @@
          </div>
          <button class="w-100 btn btn-lg btn-primary" type="submit">login</button>
       </form>
-      <h5 align="center"><a href="studentRegister.html">Don't have an account? Register here</a></h5>
+      <h5 align="center"><a href="studentRegister.php">Don't have an account? Register here</a></h5>
 
 
 

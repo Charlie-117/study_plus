@@ -29,8 +29,8 @@
                   Login
                   </a>
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                     <li><a class="dropdown-item" href="studentLogin.html">Student login</a></li>
-                     <li><a class="dropdown-item" href="educatorLogin.html">Educator login</a></li>
+                     <li><a class="dropdown-item" href="studentLogin.php">Student login</a></li>
+                     <li><a class="dropdown-item" href="educatorLogin.php">Educator login</a></li>
                   </ul>
                <li class="nav-item">
                   <a class="nav-link" href="about.html">About</a>
@@ -42,7 +42,11 @@
 
       <!-- content -->
       <form class="form-signin w-100 m-auto">
-         <h1 class="h3 mb-3 fw-normal">Educator login</h1>
+         <h1 class="h3 mb-3 fw-normal">Student registration</h1>
+         <div class="form-floating">
+            <input type="text" class="form-control" id="floatingInput" placeholder="Name" required>
+            <label class="text-muted" for="floatingInput">Name</label>
+         </div>
          <div class="form-floating">
             <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" required>
             <label class="text-muted" for="floatingInput">Email address</label>
@@ -51,9 +55,13 @@
             <input type="password" class="form-control" id="floatingPassword" placeholder="Password" required>
             <label class="text-muted" for="floatingPassword">Password</label>
          </div>
-         <button class="w-100 btn btn-lg btn-primary" type="submit">Login</button>
+         <div class="form-floating">
+            <input type="text" class="form-control" id="floatingInput" placeholder="Code" required>
+            <label class="text-muted" for="floatingInput">Code</label>
+         </div>
+         <button class="w-100 btn btn-lg btn-primary" type="submit">Register</button>
       </form>
-      <h5 align="center"><a href="educatorRegister.html">Don't have an account? Register here</a></h5>
+      <h5 align="center"><a href="studentLogin.php">Already have an account? Login here</a></h5>
 
 
 
