@@ -21,6 +21,10 @@
         $code = stripslashes($code);
         $code = mysqli_real_escape_string($con,$code);
 
+        $course = $_POST['course'];
+        $course = stripslashes($course);
+        $course = mysqli_real_escape_string($con,$course);
+
         // check if email already in db
         $qr = "SELECT email from educator where email='$mail'";
         $result = mysqli_query($con,$qr);
@@ -44,7 +48,7 @@
             mysqli_free_result($result2);
             $qr = "INSERT INTO educator (email,name,password) VALUES ('$mail','$name','$pass')";
             mysqli_query($con,$qr);
-            $qr = "INSERT INTO educator_code (email,code) VALUES ('$mail','$code')";
+            $qr = "INSERT INTO educator_code (email,code,course) VALUES ('$mail','$code','$course')";
             mysqli_query($con,$qr);
             echo "<script>alert('Account registered successfully.')</script>";
             header("location: educatorLogin.php");
@@ -112,6 +116,10 @@
          <div class="form-floating">
             <input type="text" class="form-control" id="floatingInput" placeholder="Code" name="code" required>
             <label class="text-muted" for="floatingInput">Code</label>
+         </div>
+         <div class="form-floating">
+            <input type="text" class="form-control" id="floatingInput" placeholder="Course Name" name="course" required>
+            <label class="text-muted" for="floatingInput">Course Name</label>
          </div>
          <button class="w-100 btn btn-lg btn-primary" type="submit" name="submit">Register</button>
       </form>
