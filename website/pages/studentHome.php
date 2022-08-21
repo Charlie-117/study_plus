@@ -115,11 +115,18 @@
                         $result = mysqli_query($con,$qr);
 
                         if(mysqli_num_rows($result) > 0) {
-                            $cmail = $_SESSION['mail'];
-                            $qr = "INSERT INTO student_code (email,code) VALUES ('$cmail','$ccode')";
-                            mysqli_query($con,$qr);
-                            echo "<script>alert('Enrolled into Course successfully.')</script>";
-                            header("location: studentHome.php");
+                            $qr2 = "SELECT code from student_code where code='$ccode'";
+                            $result2 = mysqli_query($con,$qr2);
+                            if(mysqli_num_rows($result2) > 0) {
+                                echo "<script>alert('You are already enrolled in the Course.')</script>";
+                            }
+                            else {
+                                $cmail = $_SESSION['mail'];
+                                $qr = "INSERT INTO student_code (email,code) VALUES ('$cmail','$ccode')";
+                                mysqli_query($con,$qr);
+                                echo "<script>alert('Enrolled into Course successfully.')</script>";
+                                header("location: studentHome.php");
+                            }
                         }
                         else {
                             echo "<script>alert('The course code does not exist.')</script>";
