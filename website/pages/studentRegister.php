@@ -1,3 +1,57 @@
+<?php
+    require("database.php");
+    session_start();
+
+    if(isset($_POST['submit'])) {
+
+        // grab data from form
+        $name = $_POST['name'];
+        $name = stripslashes($name);
+        $name = mysqli_real_escape_string($con,$name);
+
+        $mail = $_POST['email'];
+        $mail = stripslashes($mail);
+        $mail = mysqli_real_escape_string($con,$mail);
+
+        $pass = $_POST['password'];
+        $pass = stripslashes($pass);
+        $pass = mysqli_real_escape_string($con,$pass);
+
+        $code = $_POST['code'];
+        $code = stripslashes($code);
+        $code = mysqli_real_escape_string($con,$code);
+
+        // check if email already in db
+        $qr = "SELECT email from student where email='$mail'";
+        $result = mysqli_query($con,$qr);
+
+        // check if code exists
+        $qr = "SELECT code from educator_code where code='$code'";
+        $result2 = mysqli_query($con,$qr);
+
+        if(mysqli_num_rows($result) > 0) {
+            echo "<script>alert('The email is already registered.')</script>";
+            mysqli_free_result($result);
+        }
+
+        elseif (mysqli_num_rows($result2) == 0) {
+            echo "<script>alert('The code does not exist.')</script>";
+            mysqli_free_result($result2);
+        }
+
+        else {
+            mysqli_free_result($result);
+            mysqli_free_result($result2);
+            $qr = "INSERT INTO student (email,name,password) VALUES ('$mail','$name','$pass')";
+            mysqli_query($con,$qr);
+            $qr = "INSERT INTO student_code (email,code) VALUES ('$mail','$code')";
+            mysqli_query($con,$qr);
+            echo "<script>alert('Account registered successfully.')</script>";
+            header("location: studentLogin.php");
+        }
+    }
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -41,25 +95,25 @@
 
 
       <!-- content -->
-      <form class="form-signin w-100 m-auto">
+      <form class="form-signin w-100 m-auto" method="post" action="<?php echo $_SERVER['PHP_SELF'];  ?>" enctype="multipart/form-data">
          <h1 class="h3 mb-3 fw-normal">Student registration</h1>
          <div class="form-floating">
-            <input type="text" class="form-control" id="floatingInput" placeholder="Name" required>
+            <input type="text" class="form-control" id="floatingInput" placeholder="Name" name="name" required>
             <label class="text-muted" for="floatingInput">Name</label>
          </div>
          <div class="form-floating">
-            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" required>
+            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="email" required>
             <label class="text-muted" for="floatingInput">Email address</label>
          </div>
          <div class="form-floating">
-            <input type="password" class="form-control" id="floatingPassword" placeholder="Password" required>
+            <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password" required>
             <label class="text-muted" for="floatingPassword">Password</label>
          </div>
          <div class="form-floating">
-            <input type="text" class="form-control" id="floatingInput" placeholder="Code" required>
+            <input type="text" class="form-control" id="floatingInput" placeholder="Code" name="code" required>
             <label class="text-muted" for="floatingInput">Code</label>
          </div>
-         <button class="w-100 btn btn-lg btn-primary" type="submit">Register</button>
+         <button class="w-100 btn btn-lg btn-primary" type="submit" name="submit">Register</button>
       </form>
       <h5 align="center"><a href="studentLogin.php">Already have an account? Login here</a></h5>
 
