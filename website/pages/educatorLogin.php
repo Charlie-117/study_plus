@@ -35,10 +35,12 @@
                   // set session vars for future use
                   $_SESSION['name'] = $row[1];
                   $_SESSION['mail'] = $mail;
+                  mysqli_free_result($result);
                   header("location: educatorHome.php");
                }
                else {
                   // if pass is wrong then alert user
+                  mysqli_free_result($result);
                   echo "<script>alert('Wrong password, contact admin if you don\'t remember the password.')</script>";
                }
             }
