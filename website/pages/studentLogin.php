@@ -104,7 +104,7 @@
             <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password" required>
             <label class="text-muted" for="floatingPassword">Password</label>
          </div>
-         <button class="w-100 btn btn-lg btn-primary" type="submit" name="submit">login</button>
+         <button class="w-100 btn btn-lg btn-primary" type="submit" name="submit">Login</button>
       </form>
       <h5 align="center"><a href="studentRegister.php">Don't have an account? Register here</a></h5>
 
