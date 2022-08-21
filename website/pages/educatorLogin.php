@@ -1,3 +1,54 @@
+<?php
+    require("database.php");
+    session_start();
+    session_unset();
+
+    if(isset($_POST['submit'])) {
+
+        // grab data from form
+
+        $mail = $_POST['email'];
+        $mail = stripslashes($mail);
+        $mail = mysqli_real_escape_string($con,$mail);
+
+        $pass = $_POST['password'];
+        $pass = stripslashes($pass);
+        $pass = mysqli_real_escape_string($con,$pass);
+
+        // check if email is not in db
+        $qr = "SELECT email from educator where email='$mail'";
+        $result = mysqli_query($con,$qr);
+
+        if(mysqli_num_rows($result) == 0) {
+            echo "<script>alert('Please register first.')</script>";
+            mysqli_free_result($result);
+        }
+
+        // continue if mail is registered
+        else {
+            mysqli_free_result($result);
+            $qr = "SELECT * from educator where email='$mail'";
+            if($result = mysqli_query($con,$qr)) {
+               $row = mysqli_fetch_row($result);
+               // check if password is correct
+               if($row[2] == $pass) {
+                  // set session vars for future use
+                  $_SESSION['name'] = $row[1];
+                  $_SESSION['mail'] = $mail;
+                  header("location: educatorHome.php");
+               }
+               else {
+                  // if pass is wrong then alert user
+                  echo "<script>alert('Wrong password, contact admin if you don\'t remember the password.')</script>";
+               }
+            }
+            else {
+               echo "<script>alert('DB error.')</script>";
+            }
+        }
+    }
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -41,17 +92,17 @@
 
 
       <!-- content -->
-      <form class="form-signin w-100 m-auto">
+      <form class="form-signin w-100 m-auto" method="post" action="<?php echo $_SERVER['PHP_SELF'];  ?>" enctype="multipart/form-data">
          <h1 class="h3 mb-3 fw-normal">Educator login</h1>
          <div class="form-floating">
-            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" required>
+            <input type="email" class="form-control" id="floatingInput" name="email" placeholder="name@example.com" required>
             <label class="text-muted" for="floatingInput">Email address</label>
          </div>
          <div class="form-floating">
-            <input type="password" class="form-control" id="floatingPassword" placeholder="Password" required>
+            <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password" required>
             <label class="text-muted" for="floatingPassword">Password</label>
          </div>
-         <button class="w-100 btn btn-lg btn-primary" type="submit">Login</button>
+         <button class="w-100 btn btn-lg btn-primary" type="submit" name="submit">Login</button>
       </form>
       <h5 align="center"><a href="educatorRegister.php">Don't have an account? Register here</a></h5>
 
