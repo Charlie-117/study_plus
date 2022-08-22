@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Quiz Time</title>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+   </head>
+
+   <body class="bg-dark text-white">
+
+      <!-- navigation bar -->
+      <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+           <span class="navbar-brand mb-0 h1">Study+</span>
+           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+           <span class="navbar-toggler-icon"></span>
+           </button>
+           <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                 <a class="nav-link active" aria-current="page" href="educatorHome.php">Home</a>
+              </li>
+              <li class="nav-item">
+                 <a class="nav-link" href="educatorVideo.php">Videos</a>
+              </li>
+              <li class="nav-item">
+                 <a class="nav-link" href="educatorFlashCard.php">Flash Cards</a>
+              </li>
+              <li class="nav-item">
+                 <a class="nav-link" href="educatorQuiz.php">Quizzes</a>
+              </li>
+              <li class="nav-item">
+                 <a class="nav-link" href="educatorHelp.html">Help</a>
+              </li>
+              <li class="nav-item">
+                 <a class="nav-link" href="logout.php">Logout</a>
+              </li>
+           </div>
+        </div>
+     </nav>
+
+
+      <!-- content -->
+
+<h1 class="py-5 display-5 fw-bold text-center"><u>Educator Help</u></h1>
+
+<section class="w-100 p-4 text-center pb-4">
+
+    <div class="accordion" id="FAQ">
+
+    <div class="accordion-item bg-secondary">
+        <h2 class="accordion-header" id="educatorFAQ">
+            <button class="accordion-button bg-success text-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEducatorFAQ" aria-expanded="true" aria-controls="collapseEducatorFAQ">
+            Educator FAQs
+            </button>
+        </h2>
+        <div id="collapseEducatorFAQ" class="accordion-collapse collapse show" aria-labelledby="educatorFAQ" data-bs-parent="#FAQ">
+            <div class="accordion-body">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="educatorOne">
+                        <button class="accordion-button collapsed bg-success text-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEducatorOne" aria-expanded="false" aria-controls="collapseEducatorOne">
+                        What is course code?
+                        </button>
+                    </h2>
+                    <div id="collapseEducatorOne" class="accordion-collapse collapse" aria-labelledby="educatorOne" data-bs-parent="#educatorFAQ">
+                        <div class="accordion-body">
+                            The course code is for structuring your content into courses and letting the students have access to each course separately.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="educatorTwo">
+                        <button class="accordion-button collapsed bg-success text-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEducatorTwo" aria-expanded="false" aria-controls="collapseEducatorTwo">
+                        Educator two
+                        </button>
+                    </h2>
+                    <div id="collapseEducatorTwo" class="accordion-collapse collapse" aria-labelledby="educatorTwo" data-bs-parent="#educatorFAQ">
+                        <div class="accordion-body">
+                            hello 2
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+      <!-- Footer -->
+      <div class="container">
+         <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+            <p class="col-md-4 mb-0">© 2022 Tony</p>
+            <ul class="nav col-md-4 justify-content-end">
+               <li class="nav-item"><a href="../index.html" class="nav-link px-2">Home</a></li>
+               <li class="nav-item"><a href="about.html" class="nav-link px-2">About</a></li>
+            </ul>
+         </footer>
+      </div>
+
+
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+
+   </body>
+
+</html>
