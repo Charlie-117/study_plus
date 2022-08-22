@@ -4,7 +4,7 @@
     session_start();
     if(!(isset($_SESSION['course']))) {
         echo "<script>alert('Select a course first.')</script>";
-        header("location: educatorHome.php");
+        echo "<script>window.location.replace('educatorHome.php')</script>";
     }
         
     
