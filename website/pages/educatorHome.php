@@ -74,15 +74,15 @@
                     $qr = "SELECT * FROM educator_code WHERE email='$mail'";
                     $result = mysqli_query($con,$qr);
                     $n = mysqli_num_rows($result);
-                    $row = mysqli_fetch_row($result);
-                    for($i=1;$i <= $n; $i++, $row = mysqli_fetch_row($result)) {
+                    $row = mysqli_fetch_array($result);
+                    for($i=1;$i <= $n; $i++, $row = mysqli_fetch_array($result)) {
                         echo '<tr>';
                             echo '<th scope="row">' . $i . '</th>';
-                            echo '<td>' . $row[1] . '</td>';
-                            echo '<td>' .$row[2] . '</td>';
+                            echo '<td>' . $row['code'] . '</td>';
+                            echo '<td>' .$row['course'] . '</td>';
                             echo '<td>';
                                 echo '<form method="get" action="educatorHome.php">';
-                                echo '<button class="w-100 btn btn-sm btn-primary" type="submit" name="selCourse" value=' . $row[1]. '>Select</button>';
+                                echo '<button class="w-100 btn btn-sm btn-primary" type="submit" name="selCourse" value=' . $row['code']. '>Select</button>';
                                 echo '</form>';
                             echo '</td>';
                         echo '</tr>';
