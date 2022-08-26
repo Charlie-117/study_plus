@@ -36,7 +36,7 @@
                   $_SESSION['name'] = $row['name'];
                   $_SESSION['mail'] = $mail;
                   mysqli_free_result($result);
-                  header("location: educatorHome.php");
+                  echo "<script>window.location.replace('educatorHome.php')</script>";
                }
                else {
                   // if pass is wrong then alert user

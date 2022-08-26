@@ -125,7 +125,7 @@
                                 $qr = "INSERT INTO student_code (email,code) VALUES ('$cmail','$ccode')";
                                 mysqli_query($con,$qr);
                                 echo "<script>alert('Enrolled into Course successfully.')</script>";
-                                header("location: studentHome.php");
+                                echo "<script>window.location.replace('studentHome.php')</script>";
                             }
                         }
                         else {

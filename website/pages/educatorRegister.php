@@ -51,7 +51,7 @@
             $qr = "INSERT INTO educator_code (email,code,course) VALUES ('$mail','$code','$course')";
             mysqli_query($con,$qr);
             echo "<script>alert('Account registered successfully.')</script>";
-            header("location: educatorLogin.php");
+            echo "<script>window.location.replace('educatorLogin.php')</script>";
         }
     }
 ?>

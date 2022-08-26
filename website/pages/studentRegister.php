@@ -47,7 +47,8 @@
             $qr = "INSERT INTO student_code (email,code) VALUES ('$mail','$code')";
             mysqli_query($con,$qr);
             echo "<script>alert('Account registered successfully.')</script>";
-            header("location: studentLogin.php");
+            echo "<script>window.location.replace('studentLogin.php')</script>";
+
         }
     }
 ?>
