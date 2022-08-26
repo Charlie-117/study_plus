@@ -4,6 +4,7 @@
     session_start();
     if(isset($_GET['selCourse'])) {
         $_SESSION['course'] = $_GET['selCourse'];
+        $_SESSION['courseName'] = $_GET['selCourseName'];
     }
     
 ?>
@@ -82,6 +83,7 @@
                             echo '<td>' .$row['course'] . '</td>';
                             echo '<td>';
                                 echo '<form method="get" action="educatorHome.php">';
+                                echo '<input type="hidden" name="selCourseName" value="' . $row['course'] . '" required>';
                                 echo '<button class="w-100 btn btn-sm btn-primary" type="submit" name="selCourse" value=' . $row['code']. '>Select</button>';
                                 echo '</form>';
                             echo '</td>';
