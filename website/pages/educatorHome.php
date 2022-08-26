@@ -125,7 +125,7 @@
                             $qr = "INSERT INTO educator_code (email,code,course) VALUES ('$cmail','$ccode','$ccourse')";
                             mysqli_query($con,$qr);
                             echo "<script>alert('Course added successfully.')</script>";
-                            header("location: educatorHome.php");
+                            echo "<script>window.location.replace('educatorHome.php')</script>";
                         }
                     }
                     
