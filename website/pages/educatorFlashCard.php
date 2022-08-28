@@ -60,7 +60,7 @@
       <section class="ms-5">
         <?php echo "<h2>Hello, " . $_SESSION['name'] . "</h2>"; ?>
         <section class="ms-5">
-            <?php echo "<h5>Your Flashcards in course: " . $_SESSION['course'] . "-" . $_SESSION['courseName'] . "</h5>"; ?>
+            <?php echo "<h5>Your Flashcards in course: " . $_SESSION['course'] . " - " . $_SESSION['courseName'] . "</h5>"; ?>
             <table class="table table-secondary table-striped table-hover table-bordered" style="width: 50%;" >
                 <thead>
                     <tr>
