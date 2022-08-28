@@ -123,10 +123,6 @@
 
             <?php
 
-                if(isset($_POST['viewCard'])) {
-                    
-                }
-
                 if(isset($_POST['modifyCard']) || isset($_POST['CardModified'])) {
                     echo '<form class="form-signin w-100 m-auto" method="post" action="educatorFlashCard.php" id="modifyCard" enctype="multipart/form-data">';
                         $cardToModify = $_POST['modifyCard'];
