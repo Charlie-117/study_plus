@@ -2,17 +2,22 @@
 
     require("database.php");
     session_start();
+
     if(isset($_GET['selCourse'])) {
         $_SESSION['course'] = $_GET['selCourse'];
         $_SESSION['courseName'] = $_GET['selCourseName'];
     }
+
     $mail = $_SESSION['mail'];
+
+    // student score fetching and calculation
     $qr = "SELECT score FROM student_score WHERE email='$mail'";
     $result = mysqli_query($con,$qr);
     $row = mysqli_fetch_array($result);
     $score = $row['score'];
     // level upgrades after every 100 point increase in score
     $level = (int)($score/100);
+    $toLvlUp = 100 - ($score%100);
 ?>
 
 <!doctype html>
@@ -65,7 +70,7 @@
       <section class="ms-5">
         <?php
             echo "<h2>Hello, " . $_SESSION['name'] . "</h2>";
-            echo "<h4>Your level: $level score: $score </h4>";
+            echo "<h4>Your level: $level , score: $score ($toLvlUp points needed to level up) </h4>";
         ?>
         <section class="ms-5">
             <h5>Your Courses</h5>
