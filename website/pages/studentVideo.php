@@ -60,12 +60,11 @@
       <section class="ms-5">
         <?php echo "<h2>Hello, " . $_SESSION['name'] . "</h2>"; ?>
         <section class="ms-5">
-            <?php echo "<h5>Videos in course: " . $_SESSION['course'] . "-" . $_SESSION['courseName'] . "</h5>"; ?>
+            <?php echo "<h5>Videos in course: " . $_SESSION['course'] . " - " . $_SESSION['courseName'] . "</h5>"; ?>
             <table class="table table-secondary table-striped table-hover table-bordered" style="width: 50%;" >
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Video ID</th>
                         <th scope="col">Video name</th>
                         <th scope="col">Watched?</th>
                         <th scope="col">Watch</th>
@@ -81,7 +80,6 @@
                     for($i=1;$i <= $n; $i++, $row = mysqli_fetch_array($result)) {
                         echo '<tr>';
                             echo '<th scope="row">' . $i . '</th>';
-                            echo '<td>' . $row['video_id'] . '</td>';
                             echo '<td>' .$row['video_name'] . '</td>';
                             // video - watched or not
                             $qr2 = "SELECT * FROM student_video WHERE course_code='$ccode' AND video_id='{$row['video_id']}'";
