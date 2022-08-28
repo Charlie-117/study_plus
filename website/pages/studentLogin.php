@@ -29,11 +29,11 @@
             mysqli_free_result($result);
             $qr = "SELECT * from student where email='$mail'";
             if($result = mysqli_query($con,$qr)) {
-               $row = mysqli_fetch_row($result);
+               $row = mysqli_fetch_array($result);
                // check if password is correct
-               if($row[2] == $pass) {
+               if($row['password'] == $pass) {
                   // set session vars for future use
-                  $_SESSION['name'] = $row[1];
+                  $_SESSION['name'] = $row['name'];
                   $_SESSION['mail'] = $mail;
                   mysqli_free_result($result);
                   echo "<script>window.location.replace('studentHome.php')</script>";

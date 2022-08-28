@@ -82,18 +82,18 @@
                     $qr = "SELECT * FROM student_code WHERE email='$mail'";
                     $result = mysqli_query($con,$qr);
                     $n = mysqli_num_rows($result);
-                    $row = mysqli_fetch_row($result);
-                    for($i=1;$i <= $n; $i++, $row = mysqli_fetch_row($result)) {
+                    $row = mysqli_fetch_array($result);
+                    for($i=1;$i <= $n; $i++, $row = mysqli_fetch_array($result)) {
                         echo '<tr>';
                             echo '<th scope="row">' . $i . '</th>';
-                            echo '<td>' . $row[1] . '</td>';
-                            $qr2 = "SELECT course from educator_code where code='$row[1]'";
+                            echo '<td>' . $row['code'] . '</td>';
+                            $qr2 = "SELECT course from educator_code where code='{$row['code']}'";
                             $result2 = mysqli_query($con,$qr2);
-                            $row2 = mysqli_fetch_row($result2);
-                            echo '<td>' .$row2[0] . '</td>';
+                            $row2 = mysqli_fetch_array($result2);
+                            echo '<td>' .$row2['course'] . '</td>';
                             echo '<td>';
                                 echo '<form method="get" action="studentHome.php">';
-                                echo '<button class="w-100 btn btn-sm btn-primary" type="submit" name="selCourse" value=' . $row[1]. '>Select</button>';
+                                echo '<button class="w-100 btn btn-sm btn-primary" type="submit" name="selCourse" value=' . $row['code']. '>Select</button>';
                                 echo '</form>';
                             echo '</td>';
                         echo '</tr>';
