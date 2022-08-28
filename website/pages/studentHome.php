@@ -4,6 +4,7 @@
     session_start();
     if(isset($_GET['selCourse'])) {
         $_SESSION['course'] = $_GET['selCourse'];
+        $_SESSION['courseName'] = $_GET['selCourseName'];
     }
     $mail = $_SESSION['mail'];
     $qr = "SELECT score FROM student_score WHERE email='$mail'";
@@ -93,6 +94,7 @@
                             echo '<td>' .$row2['course'] . '</td>';
                             echo '<td>';
                                 echo '<form method="get" action="studentHome.php">';
+                                echo '<input type="hidden" name="selCourseName" value="' . $row2['course'] . '" required>';
                                 echo '<button class="w-100 btn btn-sm btn-primary" type="submit" name="selCourse" value=' . $row['code']. '>Select</button>';
                                 echo '</form>';
                             echo '</td>';
