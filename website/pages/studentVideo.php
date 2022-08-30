@@ -82,7 +82,7 @@
                             echo '<th scope="row">' . $i . '</th>';
                             echo '<td>' .$row['video_name'] . '</td>';
                             // video - watched or not
-                            $qr2 = "SELECT * FROM student_video WHERE course_code='$ccode' AND video_id='{$row['video_id']}'";
+                            $qr2 = "SELECT * FROM student_video WHERE email='$mail' AND course_code='$ccode' AND video_id='{$row['video_id']}'";
                             $result2 = mysqli_query($con,$qr2);
                             echo '<td>';
                             if(mysqli_num_rows($result2) > 0) {
@@ -116,7 +116,7 @@
                                                     echo '</form>';
                                                     if(isset($_POST['markWatched'])) {
                                                         $videoToMark = $_POST['markWatched'];
-                                                        $qr3 = "INSERT INTO student_video (course_code, video_id) VALUES ('$ccode','$videoToMark')";
+                                                        $qr3 = "INSERT INTO student_video (email,course_code, video_id) VALUES ('$mail','$ccode','$videoToMark')";
                                                         if(mysqli_query($con,$qr3)) {
                                                             $qr4 = "UPDATE student_score SET score=score+5 WHERE email='$mail'";
                                                             mysqli_query($con,$qr4);
