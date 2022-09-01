@@ -130,7 +130,7 @@
                         $result = mysqli_query($con,$qr);
 
                         if(mysqli_num_rows($result) > 0) {
-                            $qr2 = "SELECT code from student_code where code='$ccode'";
+                            $qr2 = "SELECT code from student_code where code='$ccode' AND email='$mail'";
                             $result2 = mysqli_query($con,$qr2);
                             if(mysqli_num_rows($result2) > 0) {
                                 echo "<script>alert('You are already enrolled in the Course.')</script>";
