@@ -11,10 +11,10 @@
     $mail = $_SESSION['mail'];
 
     // student score fetching and calculation
-    $qr = "SELECT score FROM student_score WHERE email='$mail'";
+    $qr = "SELECT sum(score) FROM student_score WHERE email='$mail'";
     $result = mysqli_query($con,$qr);
     $row = mysqli_fetch_array($result);
-    $score = $row['score'];
+    $score = $row['sum(score)'];
     // level upgrades after every 100 point increase in score
     $level = (int)($score/100);
     $toLvlUp = 100 - ($score%100);
@@ -138,7 +138,9 @@
                             else {
                                 $cmail = $_SESSION['mail'];
                                 $qr = "INSERT INTO student_code (email,code) VALUES ('$cmail','$ccode')";
+                                $qr2 = "INSERT INTO student_score (email,course_code) VALUES ('$cmail','$ccode')";
                                 mysqli_query($con,$qr);
+                                mysqli_query($con,$qr2);
                                 echo "<script>alert('Enrolled into Course successfully.')</script>";
                                 echo "<script>window.location.replace('studentHome.php')</script>";
                             }

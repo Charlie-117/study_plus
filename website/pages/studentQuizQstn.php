@@ -136,7 +136,7 @@
                                 $_SESSION['quizNCA']++;
                                 // increase score by 5 for each correct answer if quiz hasn't been played earlier
                                 if($quizPlayed == 0) {
-                                    $qr2 = "UPDATE student_score SET score=score+5 WHERE email='$mail'";
+                                    $qr2 = "UPDATE student_score SET score=score+5 WHERE email='$mail' AND course_code='$ccode'";
                                     mysqli_query($con,$qr2);
                                 }
                             }

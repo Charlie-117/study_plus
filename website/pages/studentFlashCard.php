@@ -100,7 +100,7 @@
                                                     if(isset($_POST['markRead'])) {
                                                         // unset else if condition remains true and points increase for all present cards
                                                         unset($_POST['markRead']);
-                                                        $qr2 = "UPDATE student_score SET score=score+5 WHERE email='$mail'";
+                                                        $qr2 = "UPDATE student_score SET score=score+5 WHERE email='$mail' AND course_code='$ccode'";
                                                         if(mysqli_query($con,$qr2)){
                                                             echo "<script>window.location.replace('studentFlashCard.php')</script>";
                                                         }

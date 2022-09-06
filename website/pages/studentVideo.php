@@ -118,7 +118,7 @@
                                                         $videoToMark = $_POST['markWatched'];
                                                         $qr3 = "INSERT INTO student_video (email,course_code, video_id) VALUES ('$mail','$ccode','$videoToMark')";
                                                         if(mysqli_query($con,$qr3)) {
-                                                            $qr4 = "UPDATE student_score SET score=score+5 WHERE email='$mail'";
+                                                            $qr4 = "UPDATE student_score SET score=score+5 WHERE email='$mail' AND course_code='$ccode'";
                                                             mysqli_query($con,$qr4);
                                                             echo "<script>window.location.replace('studentVideo.php')</script>";
                                                         }
