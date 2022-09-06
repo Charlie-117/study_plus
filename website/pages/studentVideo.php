@@ -105,7 +105,7 @@
                                                 echo "</div>";
                                                 echo '<div class="modal-body">';
                                                     echo '<div class="embed-responsive embed-responsive-4by3">';
-                                                        echo '<iframe width="100%" height="320" class="embed-responsive-item" src="https://www.youtube.com/embed/yj1mkArHml4" allowfullscreen=""></iframe>';
+                                                        echo "<iframe width='100%' height='320' class='embed-responsive-item' src='https://www.youtube.com/embed/{$row['video_url']}' allowfullscreen=''></iframe>";
                                                     echo '</div>';
                                                 echo '</div>';
                                                 echo '<div class="modal-footer">';

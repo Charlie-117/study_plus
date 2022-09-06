@@ -83,8 +83,8 @@
                         echo '<tr>';
                             echo '<th scope="row">' . $i . '</th>';
                             echo '<td>' . $row['video_id'] . '</td>';
-                            echo '<td>' .$row['video_name'] . '</td>';
-                            echo '<td>' .$row['video_url'] . '</td>';
+                            echo '<td>' . $row['video_name'] . '</td>';
+                            echo '<td>https://www.youtube.com/watch?v=' . $row['video_url'] . '</td>';
                             echo '<td>';
                                 echo '<form method="post" action="educatorVideo.php">';
                                 echo "<button class='w-100 btn btn-sm btn-primary' type='submit' name='modifyVideo' value='{$row['video_id']}'>Modify</button>";
@@ -108,19 +108,17 @@
             <?php
 
                 if(isset($_POST['modifyVideo']) || isset($_POST['videoModified'])) {
-                    echo '<form class="form-signin w-100 m-auto" method="post" action="educatorVideo.php" enctype="multipart/form-data">';
+                    echo '<form class="form-signin w-100 m-auto" method="post" id="modifyVideo" action="educatorVideo.php" enctype="multipart/form-data">';
                         $videoToModify = $_POST['modifyVideo'];
                         echo "Editing video with ID: " . $videoToModify;
-                        $qr = "SELECT * FROM educator_video WHERE video_id='{$_POST['modifyVideo']}'";
+                        $qr = "SELECT * FROM educator_video WHERE course_code='$ccode' AND video_id='$videoToModify'";
                         $result = mysqli_query($con, $qr);
                         $row = mysqli_fetch_array($result);
                         echo '<div class="form-floating">';
-                            echo "<input type='text' class='form-control' id='floatingInput' placeholder='{$row['video_name']}' name='videoName' required>";
-                            echo "<label class='text-muted' for='floatingInput'>" . $row['video_name'] . "</label>";
+                            echo "<textarea name='videoName' placeholder='{$row['video_name']}' form='modifyVideo' required></textarea>";
                         echo '</div>';
                         echo '<div class="form-floating">';
-                            echo "<input type='text' class='form-control' id='floatingInput' placeholder='{$row['video_url']}' name='videoURL' required>";
-                            echo "<label class='text-muted' for='floatingInput'>" . $row['video_url'] . "</label>";
+                            echo "<textarea name='videoURL' placeholder='{$row['video_url']}' form='modifyVideo' required></textarea>";
                             echo "<input type='hidden' class='form-control' id='floatingInput' name='modifyVideo' value='$videoToModify' required>";
                         echo '</div>';
                         echo '<button class="btn btn-sm btn-primary" type="submit" name="videoModified">Modify</button>';
@@ -129,6 +127,8 @@
                     if(isset($_POST['videoModified'])) {
                         $modifiedVideoName = $_POST['videoName'];
                         $modifiedVideoUrl = $_POST['videoURL'];
+                        $yt_regex_str = "/https:\/\/www.youtube.com\/watch\?v=/";
+                        $modifiedVideoUrl = preg_replace($yt_regex_str, "", $modifiedVideoUrl);
                         $videoToModify = $_POST['modifyVideo'];
                         $qr = "UPDATE educator_video SET video_name='$modifiedVideoName' , video_url='$modifiedVideoUrl' WHERE course_code='$ccode' AND video_id='$videoToModify'";
                         if(mysqli_query($con,$qr)) {
@@ -166,6 +166,8 @@
                     if(isset($_POST['videoAdded'])) {
                         $addedVideoName = $_POST['videoName'];
                         $addedVideoUrl = $_POST['videoURL'];
+                        $yt_regex_str = "/https:\/\/www.youtube.com\/watch\?v=/";
+                        $addedVideoUrl = preg_replace($yt_regex_str, "", $addedVideoUrl);
                         $addedVideoId = $_POST['videoID'];
                         $qr = "INSERT INTO educator_video (course_code, video_id, video_name, video_url) VALUES ('$ccode', '$addedVideoId', '$addedVideoName', '$addedVideoUrl')";
                         if(mysqli_query($con,$qr)) {
