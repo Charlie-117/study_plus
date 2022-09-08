@@ -59,14 +59,16 @@
       <!-- content -->
       <section class="ms-5">
         <?php echo "<h2>Hello, " . $_SESSION['name'] . "</h2>"; ?>
+        <br>
         <section class="ms-5">
             <?php echo "<h5>Flashcards in course: " . $_SESSION['course'] . " - " . $_SESSION['courseName'] . "</h5>"; ?>
-            <table class="table table-secondary table-striped table-hover table-bordered" style="width: 50%;" >
+            <br>
+            <table class="table table-secondary table-striped table-hover table-bordered" style="width: 90%;">
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Topic</th>
-                        <th scope="col">Read</th>
+                        <th scope="col" class="text-center" style="width: 5%">#</th>
+                        <th scope="col" class="text-center">Topic</th>
+                        <th scope="col" class="text-center" style="width: 20%">Read</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -78,7 +80,7 @@
                     $row = mysqli_fetch_array($result);
                     for($i=1;$i <= $n; $i++, $row = mysqli_fetch_array($result)) {
                         echo '<tr>';
-                            echo '<th scope="row">' . $i . '</th>';
+                            echo '<th class="text-center" scope="row">' . $i . '</th>';
                             echo '<td>' .$row['card_name'] . '</td>';
                             echo '<td>';
                                 // read card button
