@@ -61,15 +61,15 @@
         <?php echo "<h2>Hello, " . $_SESSION['name'] . "</h2>"; ?>
         <section class="ms-5">
             <?php echo "<h5>Your Videos in course: " . $_SESSION['course'] . " - " . $_SESSION['courseName'] . "</h5>"; ?>
-            <table class="table table-secondary table-striped table-hover table-bordered" style="width: 50%;" >
+            <table class="table table-secondary table-striped table-hover table-bordered" style="width: 90%;" >
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Video ID</th>
-                        <th scope="col">Video name</th>
-                        <th scope="col">Video url</th>
-                        <th scope="col">Modify video</th>
-                        <th scope="col">Delete video</th>
+                        <th scope="col" class="text-center" style="width: 5%">#</th>
+                        <th scope="col" class="text-center" style="width: 5%">Video ID</th>
+                        <th scope="col" class="text-center">Video name</th>
+                        <th scope="col" class="text-center">Video url</th>
+                        <th scope="col" class="text-center">Modify video</th>
+                        <th scope="col" class="text-center">Delete video</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -81,8 +81,8 @@
                     $row = mysqli_fetch_array($result);
                     for($i=1;$i <= $n; $i++, $row = mysqli_fetch_array($result)) {
                         echo '<tr>';
-                            echo '<th scope="row">' . $i . '</th>';
-                            echo '<td>' . $row['video_id'] . '</td>';
+                            echo '<th scope="row" class="text-center">' . $i . '</th>';
+                            echo '<td class="text-center">' . $row['video_id'] . '</td>';
                             echo '<td>' . $row['video_name'] . '</td>';
                             echo '<td>https://www.youtube.com/watch?v=' . $row['video_url'] . '</td>';
                             echo '<td>';
