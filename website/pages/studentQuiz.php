@@ -112,6 +112,8 @@
                         $i++;
                     }
                     echo '</div>';
+                    echo '<br>';
+                    echo '<br>';
                 }
             ?>
 
