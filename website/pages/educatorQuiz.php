@@ -78,7 +78,7 @@
                 <tbody>
                 <?php 
                     $mail = $_SESSION['mail'];
-                    $qr = "SELECT * FROM educator_quiz_name WHERE course_code='$ccode' ORDER BY quiz_id";
+                    $qr = "SELECT * FROM eduQzName WHERE course_code='$ccode' ORDER BY quiz_id";
                     $result = mysqli_query($con,$qr);
                     $n = mysqli_num_rows($result);
                     $row = mysqli_fetch_array($result);
@@ -118,8 +118,8 @@
 
                 if(isset($_POST['deleteQuiz'])) {
                     $quizToDelete = $_POST['deleteQuiz'];
-                    $qr = "DELETE FROM educator_quiz WHERE course_code='$ccode' AND quiz_id='$quizToDelete'";
-                    $qr2 = "DELETE FROM educator_quiz_name WHERE course_code='$ccode' AND quiz_id='$quizToDelete'";
+                    $qr = "DELETE FROM eduQuiz WHERE course_code='$ccode' AND quiz_id='$quizToDelete'";
+                    $qr2 = "DELETE FROM eduQzName WHERE course_code='$ccode' AND quiz_id='$quizToDelete'";
                     if(mysqli_query($con,$qr) && mysqli_query($con,$qr2)) {
                         echo "<script>alert('Quiz deleted.')</script>";
                         echo "<script>window.location.replace('educatorQuiz.php')</script>";
@@ -142,7 +142,7 @@
                     if(isset($_POST['quizAdded'])) {
                         $addedQuizName = $_POST['quizName'];
                         $addedQuizId = $_POST['quizID'];
-                        $qr = "INSERT INTO educator_quiz_name (course_code, quiz_id, quiz_name) VALUES ('$ccode', '$addedQuizId', '$addedQuizName')";
+                        $qr = "INSERT INTO eduQzName (course_code, quiz_id, quiz_name) VALUES ('$ccode', '$addedQuizId', '$addedQuizName')";
                         if(mysqli_query($con,$qr)) {
                             echo "<script>alert('Quiz Added.')</script>";
                             echo "<script>window.location.replace('educatorQuiz.php')</script>";

@@ -11,7 +11,7 @@
     $mail = $_SESSION['mail'];
 
     // student score fetching and calculation
-    $qr = "SELECT sum(score) FROM student_score WHERE email='$mail'";
+    $qr = "SELECT sum(score) FROM studScore WHERE email='$mail'";
     $result = mysqli_query($con,$qr);
     $row = mysqli_fetch_array($result);
     $score = $row['sum(score)'];
@@ -89,7 +89,7 @@
                 </thead>
                 <tbody>
                 <?php 
-                    $qr = "SELECT * FROM student_code WHERE email='$mail'";
+                    $qr = "SELECT * FROM studCode WHERE email='$mail'";
                     $result = mysqli_query($con,$qr);
                     $n = mysqli_num_rows($result);
                     $row = mysqli_fetch_array($result);
@@ -97,7 +97,7 @@
                         echo '<tr>';
                             echo '<th scope="row">' . $i . '</th>';
                             echo '<td>' . $row['code'] . '</td>';
-                            $qr2 = "SELECT course from educator_code where code='{$row['code']}'";
+                            $qr2 = "SELECT course from eduCode where code='{$row['code']}'";
                             $result2 = mysqli_query($con,$qr2);
                             $row2 = mysqli_fetch_array($result2);
                             echo '<td>' .$row2['course'] . '</td>';
@@ -130,19 +130,19 @@
                     if(isset($_POST['courseEnrolled'])) {
                         // check if code exists
                         $ccode = $_POST['code'];
-                        $qr = "SELECT code from educator_code where code='$ccode'";
+                        $qr = "SELECT code from eduCode where code='$ccode'";
                         $result = mysqli_query($con,$qr);
 
                         if(mysqli_num_rows($result) > 0) {
-                            $qr2 = "SELECT code from student_code where code='$ccode' AND email='$mail'";
+                            $qr2 = "SELECT code from studCode where code='$ccode' AND email='$mail'";
                             $result2 = mysqli_query($con,$qr2);
                             if(mysqli_num_rows($result2) > 0) {
                                 echo "<script>alert('You are already enrolled in the Course.')</script>";
                             }
                             else {
                                 $cmail = $_SESSION['mail'];
-                                $qr = "INSERT INTO student_code (email,code) VALUES ('$cmail','$ccode')";
-                                $qr2 = "INSERT INTO student_score (email,course_code) VALUES ('$cmail','$ccode')";
+                                $qr = "INSERT INTO studCode (email,code) VALUES ('$cmail','$ccode')";
+                                $qr2 = "INSERT INTO studScore (email,course_code) VALUES ('$cmail','$ccode')";
                                 mysqli_query($con,$qr);
                                 mysqli_query($con,$qr2);
                                 echo "<script>alert('Enrolled into Course successfully.')</script>";

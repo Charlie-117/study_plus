@@ -75,7 +75,7 @@
 
             <?php 
                 $mail = $_SESSION['mail'];
-                $qr = "SELECT * FROM educator_quiz_name WHERE course_code='$ccode' ORDER BY quiz_id";
+                $qr = "SELECT * FROM eduQzName WHERE course_code='$ccode' ORDER BY quiz_id";
                 $result = mysqli_query($con,$qr);
                 $n = mysqli_num_rows($result);
                 $row = mysqli_fetch_array($result);
@@ -84,7 +84,7 @@
                     echo '<div class="row justify-content-center">';
                     for($card=0;$card <3 && $i<=$n;$card++, $row = mysqli_fetch_array($result)) {
                         // quiz - played or not
-                        $qr2 = "SELECT * FROM student_quiz WHERE email='$mail' AND course_code='$ccode' AND quiz_id='{$row['quiz_id']}'";
+                        $qr2 = "SELECT * FROM studQuiz WHERE email='$mail' AND course_code='$ccode' AND quiz_id='{$row['quiz_id']}'";
                         $result2 = mysqli_query($con,$qr2);
 
                         echo '<div class="col-lg-4 col-md-6">';
@@ -135,7 +135,7 @@
             $_SESSION['quizName'] = $_POST['playQuizName'];
             $_SESSION['quizPlayed'] = $_POST['played'];
             if(!($_SESSION['quizPlayed'])) {
-                $qr3 = "INSERT INTO student_quiz (email,course_code,quiz_id) VALUES ('$mail','$ccode','$quizToMark')";
+                $qr3 = "INSERT INTO studQuiz (email,course_code,quiz_id) VALUES ('$mail','$ccode','$quizToMark')";
                 mysqli_query($con,$qr3);
             }
             echo "<script>window.location.replace('studentQuizQstn.php')</script>";

@@ -76,7 +76,7 @@
                 <tbody>
                 <?php 
                     $mail = $_SESSION['mail'];
-                    $qr = "SELECT * FROM educator_code WHERE email='$mail'";
+                    $qr = "SELECT * FROM eduCode WHERE email='$mail'";
                     $result = mysqli_query($con,$qr);
                     $n = mysqli_num_rows($result);
                     $row = mysqli_fetch_array($result);
@@ -121,7 +121,7 @@
                     if(isset($_POST['courseCreated'])) {
                         // check if code already in use
                         $ccode = $_POST['code'];
-                        $qr = "SELECT code from educator_code where code='$ccode'";
+                        $qr = "SELECT code from eduCode where code='$ccode'";
                         $result = mysqli_query($con,$qr);
 
                         if(mysqli_num_rows($result) > 0) {
@@ -132,7 +132,7 @@
                             $cmail = $_SESSION['mail'];
                             $ccourse = $_POST['course'];
                             $course_desc = $_POST['courseDesc'];
-                            $qr = "INSERT INTO educator_code (email,code,course,course_desc) VALUES ('$cmail','$ccode','$ccourse','$course_desc')";
+                            $qr = "INSERT INTO eduCode (email,code,course,course_desc) VALUES ('$cmail','$ccode','$ccourse','$course_desc')";
                             mysqli_query($con,$qr);
                             echo "<script>alert('Course added successfully.')</script>";
                             echo "<script>window.location.replace('educatorHome.php')</script>";

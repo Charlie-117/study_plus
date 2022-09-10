@@ -78,7 +78,7 @@
                 <tbody>
                 <?php
                     $mail = $_SESSION['mail'];
-                    $qr = "SELECT * FROM educator_card WHERE course_code='$ccode' ORDER BY card_id";
+                    $qr = "SELECT * FROM eduCard WHERE course_code='$ccode' ORDER BY card_id";
                     $result = mysqli_query($con,$qr);
                     $n = mysqli_num_rows($result);
                     $row = mysqli_fetch_array($result);
@@ -106,7 +106,7 @@
                                                     if(isset($_POST['markRead'])) {
                                                         // unset else if condition remains true and points increase for all present cards
                                                         unset($_POST['markRead']);
-                                                        $qr2 = "UPDATE student_score SET score=score+5 WHERE email='$mail' AND course_code='$ccode'";
+                                                        $qr2 = "UPDATE studScore SET score=score+5 WHERE email='$mail' AND course_code='$ccode'";
                                                         if(mysqli_query($con,$qr2)){
                                                             echo "<script>window.location.replace('studentFlashCard.php')</script>";
                                                         }

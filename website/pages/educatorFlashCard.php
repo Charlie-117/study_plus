@@ -78,7 +78,7 @@
                 <tbody>
                 <?php 
                     $mail = $_SESSION['mail'];
-                    $qr = "SELECT * FROM educator_card WHERE course_code='$ccode' ORDER BY card_id";
+                    $qr = "SELECT * FROM eduCard WHERE course_code='$ccode' ORDER BY card_id";
                     $result = mysqli_query($con,$qr);
                     $n = mysqli_num_rows($result);
                     $row = mysqli_fetch_array($result);
@@ -131,7 +131,7 @@
                     echo '<form class="form-signin w-100 m-auto" method="post" action="educatorFlashCard.php" id="modifyCard" enctype="multipart/form-data">';
                         $cardToModify = $_POST['modifyCard'];
                         echo "Editing flahcard with ID: " . $cardToModify;
-                        $qr = "SELECT * FROM educator_card WHERE card_id='{$_POST['modifyCard']}'";
+                        $qr = "SELECT * FROM eduCard WHERE card_id='{$_POST['modifyCard']}'";
                         $result = mysqli_query($con, $qr);
                         $row = mysqli_fetch_array($result);
                         echo '<div class="form-floating">';
@@ -148,7 +148,7 @@
                         $modifiedCardName = $_POST['cardName'];
                         $modifiedCardDesc = $_POST['cardDesc'];
                         $cardToModify = $_POST['modifyCard'];
-                        $qr = "UPDATE educator_card SET card_name='$modifiedCardName' , card_desc='$modifiedCardDesc' WHERE course_code='$ccode' AND card_id='$cardToModify'";
+                        $qr = "UPDATE eduCard SET card_name='$modifiedCardName' , card_desc='$modifiedCardDesc' WHERE course_code='$ccode' AND card_id='$cardToModify'";
                         if(mysqli_query($con,$qr)) {
                             echo "<script>window.location.replace('educatorFlashCard.php')</script>";
                         }
@@ -160,7 +160,7 @@
 
                 if(isset($_POST['deleteCard'])) {
                     $cardToDelete = $_POST['deleteCard'];
-                    $qr = "DELETE FROM educator_card WHERE course_code='$ccode' AND card_id='$cardToDelete'";
+                    $qr = "DELETE FROM eduCard WHERE course_code='$ccode' AND card_id='$cardToDelete'";
                     if(mysqli_query($con,$qr)) {
                         echo "<script>alert('Flashcard deleted.')</script>";
                         echo "<script>window.location.replace('educatorFlashCard.php')</script>";
@@ -186,7 +186,7 @@
                         $addedCardName = $_POST['cardName'];
                         $addedCardDesc = $_POST['cardDesc'];
                         $addedCardId = $_POST['cardID'];
-                        $qr = "INSERT INTO educator_card (course_code, card_id, card_name, card_desc) VALUES ('$ccode', '$addedCardId', '$addedCardName', '$addedCardDesc')";
+                        $qr = "INSERT INTO eduCard (course_code, card_id, card_name, card_desc) VALUES ('$ccode', '$addedCardId', '$addedCardName', '$addedCardDesc')";
                         if(mysqli_query($con,$qr)) {
                             echo "<script>alert('Flashcard Added.')</script>";
                             echo "<script>window.location.replace('educatorFlashCard.php')</script>";

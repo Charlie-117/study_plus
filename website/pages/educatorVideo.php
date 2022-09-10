@@ -79,7 +79,7 @@
                 <tbody>
                 <?php 
                     $mail = $_SESSION['mail'];
-                    $qr = "SELECT * FROM educator_video WHERE course_code='$ccode' ORDER BY video_id";
+                    $qr = "SELECT * FROM eduVid WHERE course_code='$ccode' ORDER BY video_id";
                     $result = mysqli_query($con,$qr);
                     $n = mysqli_num_rows($result);
                     $row = mysqli_fetch_array($result);
@@ -115,7 +115,7 @@
                     echo '<form class="form-signin w-100 m-auto" method="post" id="modifyVideo" action="educatorVideo.php" enctype="multipart/form-data">';
                         $videoToModify = $_POST['modifyVideo'];
                         echo "Editing video with ID: " . $videoToModify;
-                        $qr = "SELECT * FROM educator_video WHERE course_code='$ccode' AND video_id='$videoToModify'";
+                        $qr = "SELECT * FROM eduVid WHERE course_code='$ccode' AND video_id='$videoToModify'";
                         $result = mysqli_query($con, $qr);
                         $row = mysqli_fetch_array($result);
                         echo '<div class="form-floating">';
@@ -134,7 +134,7 @@
                         $yt_regex_str = "/https:\/\/www.youtube.com\/watch\?v=/";
                         $modifiedVideoUrl = preg_replace($yt_regex_str, "", $modifiedVideoUrl);
                         $videoToModify = $_POST['modifyVideo'];
-                        $qr = "UPDATE educator_video SET video_name='$modifiedVideoName' , video_url='$modifiedVideoUrl' WHERE course_code='$ccode' AND video_id='$videoToModify'";
+                        $qr = "UPDATE eduVid SET video_name='$modifiedVideoName' , video_url='$modifiedVideoUrl' WHERE course_code='$ccode' AND video_id='$videoToModify'";
                         if(mysqli_query($con,$qr)) {
                             echo "<script>window.location.replace('educatorVideo.php')</script>";
                         }
@@ -143,7 +143,7 @@
 
                 if(isset($_POST['deleteVideo'])) {
                     $videoToDelete = $_POST['deleteVideo'];
-                    $qr = "DELETE FROM educator_video WHERE course_code='$ccode' AND video_id='$videoToDelete'";
+                    $qr = "DELETE FROM eduVid WHERE course_code='$ccode' AND video_id='$videoToDelete'";
                     if(mysqli_query($con,$qr)) {
                         echo "<script>alert('Video deleted.')</script>";
                         echo "<script>window.location.replace('educatorVideo.php')</script>";
@@ -173,7 +173,7 @@
                         $yt_regex_str = "/https:\/\/www.youtube.com\/watch\?v=/";
                         $addedVideoUrl = preg_replace($yt_regex_str, "", $addedVideoUrl);
                         $addedVideoId = $_POST['videoID'];
-                        $qr = "INSERT INTO educator_video (course_code, video_id, video_name, video_url) VALUES ('$ccode', '$addedVideoId', '$addedVideoName', '$addedVideoUrl')";
+                        $qr = "INSERT INTO eduVid (course_code, video_id, video_name, video_url) VALUES ('$ccode', '$addedVideoId', '$addedVideoName', '$addedVideoUrl')";
                         if(mysqli_query($con,$qr)) {
                             echo "<script>alert('Video Added.')</script>";
                             echo "<script>window.location.replace('educatorVideo.php')</script>";

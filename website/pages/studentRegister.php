@@ -22,11 +22,11 @@
         $code = mysqli_real_escape_string($con,$code);
 
         // check if email already in db
-        $qr = "SELECT email from student where email='$mail'";
+        $qr = "SELECT email from stud where email='$mail'";
         $result = mysqli_query($con,$qr);
 
         // check if code exists
-        $qr = "SELECT code from educator_code where code='$code'";
+        $qr = "SELECT code from eduCode where code='$code'";
         $result2 = mysqli_query($con,$qr);
 
         if(mysqli_num_rows($result) > 0) {
@@ -42,11 +42,11 @@
         else {
             mysqli_free_result($result);
             mysqli_free_result($result2);
-            $qr = "INSERT INTO student (email,name,password) VALUES ('$mail','$name','$pass')";
+            $qr = "INSERT INTO stud (email,name,password) VALUES ('$mail','$name','$pass')";
             mysqli_query($con,$qr);
-            $qr = "INSERT INTO student_code (email,code) VALUES ('$mail','$code')";
+            $qr = "INSERT INTO studCode (email,code) VALUES ('$mail','$code')";
             mysqli_query($con,$qr);
-            $qr = "INSERT INTO student_score (email,course_code) VALUES ('$mail','$code')";
+            $qr = "INSERT INTO studScore (email,course_code) VALUES ('$mail','$code')";
             mysqli_query($con,$qr);
             echo "<script>alert('Account registered successfully.')</script>";
             echo "<script>window.location.replace('studentLogin.php')</script>";

@@ -82,7 +82,7 @@
                 <tbody>
                 <?php 
                     $mail = $_SESSION['mail'];
-                    $qr = "SELECT * FROM educator_quiz WHERE course_code='$ccode' AND quiz_id='$quizID' ORDER BY quiz_qstn_id";
+                    $qr = "SELECT * FROM eduQuiz WHERE course_code='$ccode' AND quiz_id='$quizID' ORDER BY quiz_qstn_id";
                     $result = mysqli_query($con,$qr);
                     $n = mysqli_num_rows($result);
                     $row = mysqli_fetch_array($result);
@@ -180,7 +180,7 @@
 
                 if(isset($_POST['deleteQuizQstn'])) {
                     $quizToDelete = $_POST['deleteQuizQstn'];
-                    $qr = "DELETE FROM educator_quiz WHERE course_code='$ccode' AND quiz_id='$quizID' AND quiz_qstn_id='$quizToDelete'";
+                    $qr = "DELETE FROM eduQuiz WHERE course_code='$ccode' AND quiz_id='$quizID' AND quiz_qstn_id='$quizToDelete'";
                     if(mysqli_query($con,$qr)) {
                         echo "<script>alert('Quiz question deleted.')</script>";
                         echo "<script>window.location.replace('educatorQuizQstn.php')</script>";
@@ -238,7 +238,7 @@
                         $addedOptD = $_POST['opt_d'];
                         $addedQstnAns = $_POST['quiz_ans'];
 
-                        $qr = "INSERT INTO educator_quiz (course_code,quiz_id,quiz_qstn_id,quiz_qstn,opt_a,opt_b,opt_c,opt_d,quiz_ans) VALUES ('$ccode', '$quizID', '$addedQstnId', '$addedQstn', '$addedOptA', '$addedOptB', '$addedOptC', '$addedOptD', '$addedQstnAns')";
+                        $qr = "INSERT INTO eduQuiz (course_code,quiz_id,quiz_qstn_id,quiz_qstn,opt_a,opt_b,opt_c,opt_d,quiz_ans) VALUES ('$ccode', '$quizID', '$addedQstnId', '$addedQstn', '$addedOptA', '$addedOptB', '$addedOptC', '$addedOptD', '$addedQstnAns')";
                         if(mysqli_query($con,$qr)) {
                             echo "<script>alert('Quiz question Added.')</script>";
                             echo "<script>window.location.replace('educatorQuizQstn.php')</script>";

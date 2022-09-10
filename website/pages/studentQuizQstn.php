@@ -21,7 +21,7 @@
         // QAC = QuizAttemptedCount
         $_SESSION['quizQAC'] = 1;
     }
-    $qr = "SELECT * FROM educator_quiz WHERE course_code='$ccode' AND quiz_id='$quizID' ORDER BY quiz_qstn_id";
+    $qr = "SELECT * FROM eduQuiz WHERE course_code='$ccode' AND quiz_id='$quizID' ORDER BY quiz_qstn_id";
     $result = mysqli_query($con,$qr);
     // QTN = QuestionTotalNum
     $_SESSION['quizQTN'] = mysqli_num_rows($result);
@@ -140,7 +140,7 @@
                                 $_SESSION['quizNCA']++;
                                 // increase score by 5 for each correct answer if quiz hasn't been played earlier
                                 if($quizPlayed == 0) {
-                                    $qr2 = "UPDATE student_score SET score=score+5 WHERE email='$mail' AND course_code='$ccode'";
+                                    $qr2 = "UPDATE studScore SET score=score+5 WHERE email='$mail' AND course_code='$ccode'";
                                     mysqli_query($con,$qr2);
                                 }
                             }

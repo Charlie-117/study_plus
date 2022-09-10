@@ -31,11 +31,11 @@
 
 
         // check if email already in db
-        $qr = "SELECT email from educator where email='$mail'";
+        $qr = "SELECT email from edu where email='$mail'";
         $result = mysqli_query($con,$qr);
 
         // check if code already in use
-        $qr = "SELECT code from educator_code where code='$code'";
+        $qr = "SELECT code from eduCode where code='$code'";
         $result2 = mysqli_query($con,$qr);
 
         if(mysqli_num_rows($result) > 0) {
@@ -51,9 +51,9 @@
         else {
             mysqli_free_result($result);
             mysqli_free_result($result2);
-            $qr = "INSERT INTO educator (email,name,password) VALUES ('$mail','$name','$pass')";
+            $qr = "INSERT INTO edu (email,name,password) VALUES ('$mail','$name','$pass')";
             mysqli_query($con,$qr);
-            $qr = "INSERT INTO educator_code (email,code,course,course_desc) VALUES ('$mail','$code','$course','$course_desc')";
+            $qr = "INSERT INTO eduCode (email,code,course,course_desc) VALUES ('$mail','$code','$course','$course_desc')";
             mysqli_query($con,$qr);
             echo "<script>alert('Account registered successfully.')</script>";
             echo "<script>window.location.replace('educatorLogin.php')</script>";

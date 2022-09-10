@@ -16,7 +16,7 @@
         $pass = mysqli_real_escape_string($con,$pass);
 
         // check if email is not in db
-        $qr = "SELECT email from educator where email='$mail'";
+        $qr = "SELECT email from edu where email='$mail'";
         $result = mysqli_query($con,$qr);
 
         if(mysqli_num_rows($result) == 0) {
@@ -27,7 +27,7 @@
         // continue if mail is registered
         else {
             mysqli_free_result($result);
-            $qr = "SELECT * from educator where email='$mail'";
+            $qr = "SELECT * from edu where email='$mail'";
             if($result = mysqli_query($con,$qr)) {
                $row = mysqli_fetch_array($result);
                // check if password is correct

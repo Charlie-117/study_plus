@@ -57,7 +57,7 @@
           <div class="container">
 
             <?php
-                $qr = "SELECT * FROM educator_code";
+                $qr = "SELECT * FROM eduCode";
                 $result = mysqli_query($con,$qr);
                 $n = mysqli_num_rows($result);
                 $row = mysqli_fetch_array($result);
@@ -66,7 +66,7 @@
                     echo '<div class="row justify-content-center">';
                     for($card=0;$card <3 && $i<=$n;$card++, $row = mysqli_fetch_array($result)) {
                         // educator name
-                        $qr2 = "SELECT name FROM educator WHERE email='{$row['email']}'";
+                        $qr2 = "SELECT name FROM edu WHERE email='{$row['email']}'";
                         $result2 = mysqli_query($con,$qr2);
                         $row2 = mysqli_fetch_array($result2);
 

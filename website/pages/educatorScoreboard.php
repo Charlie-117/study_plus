@@ -71,7 +71,7 @@
                 <?php
 
                     $mail = $_SESSION['mail'];
-                    $qr = "SELECT * FROM student_score WHERE course_code='$ccode' ORDER BY score DESC";
+                    $qr = "SELECT * FROM studScore WHERE course_code='$ccode' ORDER BY score DESC";
                     $result = mysqli_query($con,$qr);
                     $n = mysqli_num_rows($result);
 
@@ -97,7 +97,7 @@
                         for($i=1;$i <= $n; $i++, $row = mysqli_fetch_array($result)) {
                               echo '<tr>';
                                  echo '<th scope="row">' . $i . '</th>';
-                                 $qr2 = "SELECT name from student WHERE email='{$row['email']}'";
+                                 $qr2 = "SELECT name from stud WHERE email='{$row['email']}'";
                                  $result2 = mysqli_query($con,$qr2);
                                  $row2 = mysqli_fetch_array($result2); 
                                  echo '<td>' . $row2['name'] . '</td>';

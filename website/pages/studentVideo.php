@@ -70,7 +70,7 @@
 
                 <?php 
                     $mail = $_SESSION['mail'];
-                    $qr = "SELECT * FROM educator_video WHERE course_code='$ccode' ORDER BY video_id";
+                    $qr = "SELECT * FROM eduVid WHERE course_code='$ccode' ORDER BY video_id";
                     $result = mysqli_query($con,$qr);
                     $n = mysqli_num_rows($result);
                     $row = mysqli_fetch_array($result);
@@ -79,7 +79,7 @@
                         echo '<div class="row justify-content-center">';
                             for($card=0;$card<3 && $i<=$n;$card++, $row = mysqli_fetch_array($result)) {
                                 // video - watched or not
-                                $qr2 = "SELECT * FROM student_video WHERE email='$mail' AND course_code='$ccode' AND video_id='{$row['video_id']}'";
+                                $qr2 = "SELECT * FROM studVid WHERE email='$mail' AND course_code='$ccode' AND video_id='{$row['video_id']}'";
                                 $result2 = mysqli_query($con,$qr2);
 
                                 echo '<div class="col-lg-4 col-md-6">';
@@ -117,9 +117,9 @@
                                                             echo '</form>';
                                                             if(isset($_POST['markWatched'])) {
                                                                 $videoToMark = $_POST['markWatched'];
-                                                                $qr3 = "INSERT INTO student_video (email,course_code, video_id) VALUES ('$mail','$ccode','$videoToMark')";
+                                                                $qr3 = "INSERT INTO studVid (email,course_code, video_id) VALUES ('$mail','$ccode','$videoToMark')";
                                                                 if(mysqli_query($con,$qr3)) {
-                                                                    $qr4 = "UPDATE student_score SET score=score+5 WHERE email='$mail' AND course_code='$ccode'";
+                                                                    $qr4 = "UPDATE studScore SET score=score+5 WHERE email='$mail' AND course_code='$ccode'";
                                                                     mysqli_query($con,$qr4);
                                                                     unset($_POST['markWatched']);
                                                                     echo "<script>window.location.replace('studentVideo.php')</script>";
