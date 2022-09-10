@@ -53,25 +53,29 @@
             <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-               <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="studentHome.php">Home</a>
-               </li>
-               <li class="nav-item">
-                  <a class="nav-link" href="studentVideo.php">Videos</a>
-               </li>
-               <li class="nav-item">
-                  <a class="nav-link" href="studentFlashCard.php">Flash Cards</a>
-               </li>
-               <li class="nav-item">
-                  <a class="nav-link" href="studentQuiz.php">Quizzes</a>
-               </li>
-               <li class="nav-item">
-                  <a class="nav-link" href="studentHelp.html">Help</a>
-               </li>
-               <li class="nav-item">
-                  <a class="nav-link" href="logout.php">Logout</a>
-               </li>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="studentHome.php">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="studentVideo.php">Videos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="studentFlashCard.php">Flash Cards</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="studentQuiz.php">Quizzes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="studentScoreboard.php">Score</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="studentHelp.html">Help</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="logout.php">Logout</a>
+                    </li>
+                </ul>
             </div>
          </div>
       </nav>
