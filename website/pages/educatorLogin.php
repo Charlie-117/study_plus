@@ -85,6 +85,9 @@
                    <li><a class="dropdown-item" href="educatorLogin.php">Educator login</a></li>
                  </ul>
                </li>
+               <li class="nav-item">
+                <a class="nav-link" href="courses.php">Courses</a>
+              </li>
               <li class="nav-item">
                 <a class="nav-link" href="about.html">About</a>
               </li>

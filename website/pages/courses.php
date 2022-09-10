@@ -51,40 +51,46 @@
       <!-- content -->
         <section class="ms-5">
           <br><br>
-            <div class="text-center mx-5">
-              <table class="table table-secondary table-striped table-hover table-bordered" style="width: 90%;" >
-                <thead>
-                  <tr>
-                    <th colspan="4">Available courses</th>
-                  </tr>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Course code</th>
-                    <th scope="col">Course Name</th>
-                    <th scope="col">Taught by</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php
-                    $qr = "SELECT * FROM educator_code";
-                    $result = mysqli_query($con,$qr);
-                    $n = mysqli_num_rows($result);
-                    $row = mysqli_fetch_array($result);
-                    for($i=1;$i <= $n; $i++, $row = mysqli_fetch_array($result)) {
-                      $qr2 = "SELECT name FROM educator WHERE email='{$row['email']}'";
-                      $result2 = mysqli_query($con,$qr2);
-                      $row2 = mysqli_fetch_array($result2);
-                      echo '<tr>';
-                        echo '<th scope="row">' . $i . '</th>'; 
-                        echo '<td>' . $row['code'] . '</td>';
-                        echo '<td>' . $row['course'] . '</td>';
-                        echo '<td>' . $row2['name'] . '</td>';
-                      echo '</tr>';
+          <h1 class="text-center">Available courses</h1>
+          <br><br>
+
+          <div class="container">
+
+            <?php
+                $qr = "SELECT * FROM educator_code";
+                $result = mysqli_query($con,$qr);
+                $n = mysqli_num_rows($result);
+                $row = mysqli_fetch_array($result);
+                $i = 1;
+                while($i <= $n) {
+                    echo '<div class="row justify-content-center">';
+                    for($card=0;$card <3 && $i<=$n;$card++, $row = mysqli_fetch_array($result)) {
+                        // educator name
+                        $qr2 = "SELECT name FROM educator WHERE email='{$row['email']}'";
+                        $result2 = mysqli_query($con,$qr2);
+                        $row2 = mysqli_fetch_array($result2);
+
+                        echo '<div class="col-lg-4 col-md-6">';
+                            echo '<div class="card text-center border border-primary shadow-0 text-white" style="background-color:#2e3436;">';
+                                echo '<div class="card-body">';
+                                    echo "<h5 class='card-title'>{$row['course']}</h5>";
+                                    echo '<p class="card-text">';
+                                        echo "Course code - {$row['code']} <br> Taught by - {$row2['name']} <br><br> {$row['course_desc']}";
+                                    echo '</p>';
+                                echo '</div>';
+                            echo '</div>';
+                        echo '</div>';
+                        mysqli_free_result($result2);
+                        $i++;
                     }
-                 ?>
-                </tbody>
-              </table>
+                    echo '</div>';
+                    echo '<br>';
+                    echo '<br>';
+                }
+            ?>
+
             </div>
+            
         </section>
 
       <!-- Footer -->

@@ -103,7 +103,7 @@
 
             <?php
                 if(isset($_POST['createCourse']) || isset($_POST['courseCreated'])) {
-                    echo '<form class="form-signin w-100 m-auto" method="post" action="educatorHome.php" enctype="multipart/form-data">';
+                    echo '<form class="form-signin w-100 m-auto" method="post" action="educatorHome.php" enctype="multipart/form-data" id="addCourse">';
                         echo '<div class="form-floating">';
                             echo '<input type="text" class="form-control" id="floatingInput" placeholder="Code" name="code" required>';
                             echo '<label class="text-muted" for="floatingInput">Code</label>';
@@ -111,6 +111,9 @@
                         echo '<div class="form-floating">';
                             echo '<input type="text" class="form-control" id="floatingInput" placeholder="Course Name" name="course" required>';
                             echo '<label class="text-muted" for="floatingInput">Course Name</label>';
+                        echo '</div>';
+                        echo '<div class="form-floating">';
+                            echo "<textarea name='courseDesc' placeholder='Course Description' form='addCourse' required></textarea>";
                         echo '</div>';
                         echo '<button class="btn btn-sm btn-primary" type="submit" name="courseCreated">Add</button>';
                     echo '</form>';
@@ -128,7 +131,8 @@
                         else {
                             $cmail = $_SESSION['mail'];
                             $ccourse = $_POST['course'];
-                            $qr = "INSERT INTO educator_code (email,code,course) VALUES ('$cmail','$ccode','$ccourse')";
+                            $course_desc = $_POST['courseDesc'];
+                            $qr = "INSERT INTO educator_code (email,code,course,course_desc) VALUES ('$cmail','$ccode','$ccourse','$course_desc')";
                             mysqli_query($con,$qr);
                             echo "<script>alert('Course added successfully.')</script>";
                             echo "<script>window.location.replace('educatorHome.php')</script>";

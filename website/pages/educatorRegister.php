@@ -25,6 +25,11 @@
         $course = stripslashes($course);
         $course = mysqli_real_escape_string($con,$course);
 
+        $course_desc = $_POST['courseDesc'];
+        $course_desc = stripslashes($course_desc);
+        $course_desc = mysqli_real_escape_string($con,$course_desc);
+
+
         // check if email already in db
         $qr = "SELECT email from educator where email='$mail'";
         $result = mysqli_query($con,$qr);
@@ -48,7 +53,7 @@
             mysqli_free_result($result2);
             $qr = "INSERT INTO educator (email,name,password) VALUES ('$mail','$name','$pass')";
             mysqli_query($con,$qr);
-            $qr = "INSERT INTO educator_code (email,code,course) VALUES ('$mail','$code','$course')";
+            $qr = "INSERT INTO educator_code (email,code,course,course_desc) VALUES ('$mail','$code','$course','$course_desc')";
             mysqli_query($con,$qr);
             echo "<script>alert('Account registered successfully.')</script>";
             echo "<script>window.location.replace('educatorLogin.php')</script>";
@@ -90,6 +95,9 @@
                    <li><a class="dropdown-item" href="educatorLogin.php">Educator login</a></li>
                  </ul>
                </li>
+               <li class="nav-item">
+                <a class="nav-link" href="courses.php">Courses</a>
+              </li>
               <li class="nav-item">
                 <a class="nav-link" href="about.html">About</a>
               </li>
@@ -100,7 +108,7 @@
 
 
       <!-- content -->
-      <form class="form-signin w-100 m-auto" method="post" action="<?php echo $_SERVER['PHP_SELF'];  ?>" enctype="multipart/form-data">
+      <form class="form-signin w-100 m-auto" method="post" action="<?php echo $_SERVER['PHP_SELF'];  ?>" enctype="multipart/form-data" id="eduRegister">
          <h1 class="h3 mb-3 fw-normal">Educator registration</h1>
          <div class="form-floating">
             <input type="text" class="form-control" id="floatingInput" placeholder="Name" name="name" required>
@@ -122,6 +130,10 @@
             <input type="text" class="form-control" id="floatingInput" placeholder="Course Name" name="course" required>
             <label class="text-muted" for="floatingInput">Course Name</label>
          </div>
+         <div class="form-floating">
+            <textarea name='courseDesc' placeholder='Course Description' form='eduRegister' required></textarea>
+         </div>
+         <br>
          <button class="w-100 btn btn-lg btn-primary" type="submit" name="submit">Register</button>
       </form>
       <h5 align="center"><a href="educatorLogin.php">Already have an account? Login here</a></h5>
