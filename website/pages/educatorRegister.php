@@ -71,30 +71,31 @@
    <body class="bg-dark text-white">
 
       <!-- navigation bar -->
-      <nav class="navbar navbar-expand-lg navbar-dark">
-         <div class="container-fluid">
-            <span class="navbar-brand mb-0 h1">Study+</span>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-xl">
+          <a class="navbar-brand">Study+</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-               <li class="nav-item">
-                  <a class="nav-link" aria-current="page" href="../index.html">Home</a>
+          </button>
+    
+          <div class="collapse navbar-collapse" id="navbar">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" href="../index.html">Home</a>
+              </li>
+              <li class="nav-item dropdown">
+                 <a class="nav-link dropdown-toggle" href="#" id="dropdown" data-bs-toggle="dropdown" aria-expanded="false">Login</a>
+                 <ul class="dropdown-menu" aria-labelledby="dropdown">
+                   <li><a class="dropdown-item" href="studentLogin.php">Student login</a></li>
+                   <li><a class="dropdown-item" href="educatorLogin.php">Educator login</a></li>
+                 </ul>
                </li>
-               <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Login
-                  </a>
-                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                     <li><a class="dropdown-item" href="studentLogin.php">Student login</a></li>
-                     <li><a class="dropdown-item" href="educatorLogin.php">Educator login</a></li>
-                  </ul>
-               <li class="nav-item">
-                  <a class="nav-link" href="about.html">About</a>
-               </li>
-            </div>
-         </div>
+              <li class="nav-item">
+                <a class="nav-link" href="about.html">About</a>
+              </li>
+            </ul>
+          </div>
+        </div>
       </nav>
 
 
