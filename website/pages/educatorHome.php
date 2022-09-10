@@ -45,6 +45,9 @@
                         <a class="nav-link" href="educatorQuiz.php">Quizzes</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="educatorScoreboard.php">Course stats</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="educatorHelp.html">Help</a>
                     </li>
                     <li class="nav-item">

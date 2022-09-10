@@ -107,9 +107,9 @@
                               echo '<tr>';
                                  echo '<th scope="row">' . $i . '</th>';
                                  $qr2 = "SELECT name from student WHERE email='{$row['email']}'";
-                                 $result = mysqli_query($con,$qr2);
-                                 $row2 = mysqli_fetch_array($result); 
-                                 echo '<td>' .$row2['name'] . '</td>';
+                                 $result2 = mysqli_query($con,$qr2);
+                                 $row2 = mysqli_fetch_array($result2); 
+                                 echo '<td>' . $row2['name'] . '</td>';
                                  echo '<td>';
                                  echo "{$row['score']}";
                                  echo '</td>';
@@ -154,9 +154,9 @@
                               echo '<tr>';
                                  echo '<th scope="row">' . $i . '</th>';
                                  $qr2 = "SELECT name from student WHERE email='{$row['email']}'";
-                                 $result = mysqli_query($con,$qr2);
-                                 $row2 = mysqli_fetch_array($result); 
-                                 echo '<td>' .$row2['name'] . '</td>';
+                                 $result2 = mysqli_query($con,$qr2);
+                                 $row2 = mysqli_fetch_array($result2); 
+                                 echo '<td>' . $row2['name'] . '</td>';
                                  echo '<td>';
                                  echo "{$row['sum(score)']}";
                                  echo '</td>';
