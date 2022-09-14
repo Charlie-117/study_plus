@@ -179,10 +179,20 @@
                         $yt_regex_str = "/https:\/\/www.youtube.com\/watch\?v=/";
                         $addedVideoUrl = preg_replace($yt_regex_str, "", $addedVideoUrl);
                         $addedVideoId = $_POST['videoID'];
-                        $qr = "INSERT INTO eduVid (course_code, video_id, video_name, video_url) VALUES ('$ccode', '$addedVideoId', '$addedVideoName', '$addedVideoUrl')";
-                        if(mysqli_query($con,$qr)) {
-                            echo "<script>alert('Video Added.')</script>";
+
+                        $qr = "SELECT video_id FROM eduVid WHERE video_id='$addedVideoId' AND course_code='$ccode'";
+                        $result = mysqli_query($con,$qr);
+                        $n = mysqli_num_rows($result);
+                        if($n > 0) {
+                            echo "<script>alert('Video ID already exists.')</script>";
                             echo "<script>window.location.replace('educatorVideo.php')</script>";
+                        }
+                        else {
+                            $qr = "INSERT INTO eduVid (course_code, video_id, video_name, video_url) VALUES ('$ccode', '$addedVideoId', '$addedVideoName', '$addedVideoUrl')";
+                            if(mysqli_query($con,$qr)) {
+                                echo "<script>alert('Video Added.')</script>";
+                                echo "<script>window.location.replace('educatorVideo.php')</script>";
+                            }
                         }
                     }
                 }

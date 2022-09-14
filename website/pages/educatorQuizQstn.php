@@ -238,10 +238,19 @@
                         $addedOptD = $_POST['opt_d'];
                         $addedQstnAns = $_POST['quiz_ans'];
 
-                        $qr = "INSERT INTO eduQuiz (course_code,quiz_id,quiz_qstn_id,quiz_qstn,opt_a,opt_b,opt_c,opt_d,quiz_ans) VALUES ('$ccode', '$quizID', '$addedQstnId', '$addedQstn', '$addedOptA', '$addedOptB', '$addedOptC', '$addedOptD', '$addedQstnAns')";
-                        if(mysqli_query($con,$qr)) {
-                            echo "<script>alert('Quiz question Added.')</script>";
+                        $qr = "SELECT quiz_qstn_id FROM eduQuiz WHERE quiz_qstn_id='$addedQstnId' AND quiz_id='$quizID' AND course_code='$ccode'";
+                        $result = mysqli_query($con,$qr);
+                        $n = mysqli_num_rows($result);
+                        if($n > 0) {
+                            echo "<script>alert('Quiz question ID already exists.')</script>";
                             echo "<script>window.location.replace('educatorQuizQstn.php')</script>";
+                        }
+                        else {
+                            $qr = "INSERT INTO eduQuiz (course_code,quiz_id,quiz_qstn_id,quiz_qstn,opt_a,opt_b,opt_c,opt_d,quiz_ans) VALUES ('$ccode', '$quizID', '$addedQstnId', '$addedQstn', '$addedOptA', '$addedOptB', '$addedOptC', '$addedOptD', '$addedQstnAns')";
+                            if(mysqli_query($con,$qr)) {
+                                echo "<script>alert('Quiz question Added.')</script>";
+                                echo "<script>window.location.replace('educatorQuizQstn.php')</script>";
+                            }
                         }
                     }
                 }

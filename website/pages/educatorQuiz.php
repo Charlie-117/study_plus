@@ -148,10 +148,19 @@
                     if(isset($_POST['quizAdded'])) {
                         $addedQuizName = $_POST['quizName'];
                         $addedQuizId = $_POST['quizID'];
-                        $qr = "INSERT INTO eduQzName (course_code, quiz_id, quiz_name) VALUES ('$ccode', '$addedQuizId', '$addedQuizName')";
-                        if(mysqli_query($con,$qr)) {
-                            echo "<script>alert('Quiz Added.')</script>";
+                        $qr = "SELECT quiz_id FROM eduQzName WHERE quiz_id='$addedQuizId' AND course_code='$ccode'";
+                        $result = mysqli_query($con,$qr);
+                        $n = mysqli_num_rows($result);
+                        if($n > 0) {
+                            echo "<script>alert('Quiz ID already exists.')</script>";
                             echo "<script>window.location.replace('educatorQuiz.php')</script>";
+                        }
+                        else {
+                            $qr = "INSERT INTO eduQzName (course_code, quiz_id, quiz_name) VALUES ('$ccode', '$addedQuizId', '$addedQuizName')";
+                            if(mysqli_query($con,$qr)) {
+                                echo "<script>alert('Quiz Added.')</script>";
+                                echo "<script>window.location.replace('educatorQuiz.php')</script>";
+                            }
                         }
                     }
                 }

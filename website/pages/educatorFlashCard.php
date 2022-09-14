@@ -193,10 +193,19 @@
                         $addedCardName = $_POST['cardName'];
                         $addedCardDesc = $_POST['cardDesc'];
                         $addedCardId = $_POST['cardID'];
-                        $qr = "INSERT INTO eduCard (course_code, card_id, card_name, card_desc) VALUES ('$ccode', '$addedCardId', '$addedCardName', '$addedCardDesc')";
-                        if(mysqli_query($con,$qr)) {
-                            echo "<script>alert('Flashcard Added.')</script>";
+                        $qr = "SELECT card_id from eduCard WHERE card_id='$addedCardId' AND course_code='$ccode'";
+                        $result = mysqli_query($con,$qr);
+                        $n = mysqli_num_rows($result);
+                        if($n > 0) {
+                            echo "<script>alert('Flashcard ID already exists.')</script>";
                             echo "<script>window.location.replace('educatorFlashCard.php')</script>";
+                        }
+                        else {
+                            $qr = "INSERT INTO eduCard (course_code, card_id, card_name, card_desc) VALUES ('$ccode', '$addedCardId', '$addedCardName', '$addedCardDesc')";
+                            if(mysqli_query($con,$qr)) {
+                                echo "<script>alert('Flashcard Added.')</script>";
+                                echo "<script>window.location.replace('educatorFlashCard.php')</script>";
+                            }
                         }
                     }
                 }
