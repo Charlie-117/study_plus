@@ -62,7 +62,11 @@
                 $n = mysqli_num_rows($result);
                 $row = mysqli_fetch_array($result);
                 $i = 1;
-                while($i <= $n) {
+                if($n == 0) {
+                  echo "<h3 class='text-center'>No courses available</h3>";
+                }
+                else {
+                  while($i <= $n) {
                     echo '<div class="row justify-content-center">';
                     for($card=0;$card <3 && $i<=$n;$card++, $row = mysqli_fetch_array($result)) {
                         // educator name
@@ -86,7 +90,9 @@
                     echo '</div>';
                     echo '<br>';
                     echo '<br>';
+                  }
                 }
+
             ?>
 
             </div>

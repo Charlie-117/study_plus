@@ -75,71 +75,76 @@
                     $n = mysqli_num_rows($result);
                     $row = mysqli_fetch_array($result);
                     $i = 1;
-                    while($i <= $n) {
-                        echo '<div class="row justify-content-center">';
-                            for($card=0;$card<3 && $i<=$n;$card++, $row = mysqli_fetch_array($result)) {
-                                // video - watched or not
-                                $qr2 = "SELECT * FROM studVid WHERE email='$mail' AND course_code='$ccode' AND video_id='{$row['video_id']}'";
-                                $result2 = mysqli_query($con,$qr2);
+                    if($n == 0) {
+                        echo "<h3 class='text-center'>No videos available</h3>";
+                    }
+                    else {
+                        while($i <= $n) {
+                            echo '<div class="row justify-content-center">';
+                                for($card=0;$card<3 && $i<=$n;$card++, $row = mysqli_fetch_array($result)) {
+                                    // video - watched or not
+                                    $qr2 = "SELECT * FROM studVid WHERE email='$mail' AND course_code='$ccode' AND video_id='{$row['video_id']}'";
+                                    $result2 = mysqli_query($con,$qr2);
 
-                                echo '<div class="col-lg-4 col-md-6">';
-                                    echo '<div class="card text-center border border-primary shadow-0 text-white" style="background-color:#2e3436;">';
-                                    echo '<div class="card-body">';
-                                        echo "<h5 class='card-title'>$i - {$row['video_name']}</h5>";
-                                        echo '<br>';
-                                        $watched = (mysqli_num_rows($result2) > 0)?1:0;
-                                        if($watched == 1) {
-                                            echo '<span class="badge bg-success w-75">Watched';
-                                        }
-                                        else {
-                                            echo '<span class="badge bg-danger w-75">Not watched';
-                                        }
-                                        echo '<br>';
-                                        echo '<br>';
-                                        echo "<button class='w-100 btn btn-sm btn-primary' data-bs-toggle='modal' data-bs-target='#Video{$row['video_id']}'>Watch</button></span>";
-                                        echo "<div class='modal fade' id='Video{$row['video_id']}' data-bs-backdrop='static' data-bs-keyboard='false' tabindex='-1' aria-labelledby='VideoLabel{$row['video_id']}' aria-hidden='true'>";
-                                            echo '<div class="modal-dialog">';
-                                                echo '<div class="modal-content">';
-                                                    echo '<div class="modal-header">';
-                                                        echo "<h5 class='modal-title text-dark' id='VideoLabel{$row['video_id']}'>{$row['video_name']}</h5>";
-                                                        echo "<button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>";
-                                                    echo "</div>";
-                                                    echo '<div class="modal-body">';
-                                                        echo '<div class="embed-responsive embed-responsive-4by3">';
-                                                            echo "<iframe width='100%' height='320' class='embed-responsive-item' src='https://www.youtube.com/embed/{$row['video_url']}' allowfullscreen=''></iframe>";
+                                    echo '<div class="col-lg-4 col-md-6">';
+                                        echo '<div class="card text-center border border-primary shadow-0 text-white" style="background-color:#2e3436;">';
+                                        echo '<div class="card-body">';
+                                            echo "<h5 class='card-title'>$i - {$row['video_name']}</h5>";
+                                            echo '<br>';
+                                            $watched = (mysqli_num_rows($result2) > 0)?1:0;
+                                            if($watched == 1) {
+                                                echo '<span class="badge bg-success w-75">Watched';
+                                            }
+                                            else {
+                                                echo '<span class="badge bg-danger w-75">Not watched';
+                                            }
+                                            echo '<br>';
+                                            echo '<br>';
+                                            echo "<button class='w-100 btn btn-sm btn-primary' data-bs-toggle='modal' data-bs-target='#Video{$row['video_id']}'>Watch</button></span>";
+                                            echo "<div class='modal fade' id='Video{$row['video_id']}' data-bs-backdrop='static' data-bs-keyboard='false' tabindex='-1' aria-labelledby='VideoLabel{$row['video_id']}' aria-hidden='true'>";
+                                                echo '<div class="modal-dialog">';
+                                                    echo '<div class="modal-content">';
+                                                        echo '<div class="modal-header">';
+                                                            echo "<h5 class='modal-title text-dark' id='VideoLabel{$row['video_id']}'>{$row['video_name']}</h5>";
+                                                            echo "<button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>";
+                                                        echo "</div>";
+                                                        echo '<div class="modal-body">';
+                                                            echo '<div class="embed-responsive embed-responsive-4by3">';
+                                                                echo "<iframe width='100%' height='320' class='embed-responsive-item' src='https://www.youtube.com/embed/{$row['video_url']}' allowfullscreen=''></iframe>";
+                                                            echo '</div>';
                                                         echo '</div>';
-                                                    echo '</div>';
-                                                    echo '<div class="modal-footer">';
-                                                        // if video is not present in student_video table show button to mark as watched
-                                                        if(!(mysqli_num_rows($result2) > 0)) {
-                                                            echo '<form method="post" action="studentVideo.php">';
-                                                                echo "<button type='submit' class='btn btn-primary' name='markWatched' value='{$row['video_id']}'>Mark as watched</button>";
-                                                            echo '</form>';
-                                                            if(isset($_POST['markWatched'])) {
-                                                                $videoToMark = $_POST['markWatched'];
-                                                                $qr3 = "INSERT INTO studVid (email,course_code, video_id) VALUES ('$mail','$ccode','$videoToMark')";
-                                                                if(mysqli_query($con,$qr3)) {
-                                                                    $qr4 = "UPDATE studScore SET score=score+5 WHERE email='$mail' AND course_code='$ccode'";
-                                                                    mysqli_query($con,$qr4);
-                                                                    unset($_POST['markWatched']);
-                                                                    echo "<script>window.location.replace('studentVideo.php')</script>";
+                                                        echo '<div class="modal-footer">';
+                                                            // if video is not present in student_video table show button to mark as watched
+                                                            if(!(mysqli_num_rows($result2) > 0)) {
+                                                                echo '<form method="post" action="studentVideo.php">';
+                                                                    echo "<button type='submit' class='btn btn-primary' name='markWatched' value='{$row['video_id']}'>Mark as watched</button>";
+                                                                echo '</form>';
+                                                                if(isset($_POST['markWatched'])) {
+                                                                    $videoToMark = $_POST['markWatched'];
+                                                                    $qr3 = "INSERT INTO studVid (email,course_code, video_id) VALUES ('$mail','$ccode','$videoToMark')";
+                                                                    if(mysqli_query($con,$qr3)) {
+                                                                        $qr4 = "UPDATE studScore SET score=score+5 WHERE email='$mail' AND course_code='$ccode'";
+                                                                        mysqli_query($con,$qr4);
+                                                                        unset($_POST['markWatched']);
+                                                                        echo "<script>window.location.replace('studentVideo.php')</script>";
+                                                                    }
                                                                 }
                                                             }
-                                                        }
-                                                        mysqli_free_result($result2);
-                                                        echo "<button type='button' class='btn btn-primary' data-bs-dismiss='modal'>Close</button>";
+                                                            mysqli_free_result($result2);
+                                                            echo "<button type='button' class='btn btn-primary' data-bs-dismiss='modal'>Close</button>";
+                                                        echo '</div>';
                                                     echo '</div>';
                                                 echo '</div>';
                                             echo '</div>';
                                         echo '</div>';
-                                    echo '</div>';
-                                    echo '</div>';
-                                    $i++;
-                                    echo '</div>';
-                            }
-                        echo '</div>';
-                        echo '<br>';
-                        echo '<br>';
+                                        echo '</div>';
+                                        $i++;
+                                        echo '</div>';
+                                }
+                            echo '</div>';
+                            echo '<br>';
+                            echo '<br>';
+                        }
                     }
                 ?>
 

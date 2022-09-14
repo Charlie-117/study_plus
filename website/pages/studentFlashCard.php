@@ -82,42 +82,47 @@
                     $result = mysqli_query($con,$qr);
                     $n = mysqli_num_rows($result);
                     $row = mysqli_fetch_array($result);
-                    for($i=1;$i <= $n; $i++, $row = mysqli_fetch_array($result)) {
-                        echo '<tr>';
-                            echo '<th class="text-center" scope="row">' . $i . '</th>';
-                            echo '<td>' .$row['card_name'] . '</td>';
-                            echo '<td>';
-                                // read card button
-                                echo "<button class='w-100 btn btn-sm btn-primary' data-bs-toggle='modal' data-bs-target='#card{$row['card_id']}'>Read</button>";
-                                echo "<div class='modal fade' id='card{$row['card_id']}' data-bs-backdrop='static' data-bs-keyboard='false' tabindex='-1' aria-labelledby='VideoLabel{$row['video_id']}' aria-hidden='true'>";
-                                    echo '<div class="modal-dialog">';
-                                        echo '<div class="modal-content">';
-                                            echo '<div class="modal-header">';
-                                                echo "<h5 class='modal-title' id='cardLabel{$row['card_id']}'>{$row['card_name']}</h5>";
-                                                echo "<button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>";
-                                                echo "</div>";
-                                                echo '<div class="modal-body">';
-                                                    echo "{$row['card_desc']}";
-                                                echo '</div>';
-                                                echo '<div class="modal-footer">';
-                                                echo '<form method="post" action="studentFlashCard.php">';
-                                                        echo "<button type='submit' class='btn btn-primary' name='markRead' data-bs-dismiss='modal'>Close</button>";
-                                                    echo '</form>';
-                                                    if(isset($_POST['markRead'])) {
-                                                        // unset else if condition remains true and points increase for all present cards
-                                                        unset($_POST['markRead']);
-                                                        $qr2 = "UPDATE studScore SET score=score+5 WHERE email='$mail' AND course_code='$ccode'";
-                                                        if(mysqli_query($con,$qr2)){
-                                                            echo "<script>window.location.replace('studentFlashCard.php')</script>";
+                    if($n == 0) {
+                        echo "<tr><td class='text-center' colspan='3'>No Flashcards available</td></tr>";
+                    }
+                    else {
+                        for($i=1;$i <= $n; $i++, $row = mysqli_fetch_array($result)) {
+                            echo '<tr>';
+                                echo '<th class="text-center" scope="row">' . $i . '</th>';
+                                echo '<td>' .$row['card_name'] . '</td>';
+                                echo '<td>';
+                                    // read card button
+                                    echo "<button class='w-100 btn btn-sm btn-primary' data-bs-toggle='modal' data-bs-target='#card{$row['card_id']}'>Read</button>";
+                                    echo "<div class='modal fade' id='card{$row['card_id']}' data-bs-backdrop='static' data-bs-keyboard='false' tabindex='-1' aria-labelledby='VideoLabel{$row['video_id']}' aria-hidden='true'>";
+                                        echo '<div class="modal-dialog">';
+                                            echo '<div class="modal-content">';
+                                                echo '<div class="modal-header">';
+                                                    echo "<h5 class='modal-title' id='cardLabel{$row['card_id']}'>{$row['card_name']}</h5>";
+                                                    echo "<button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>";
+                                                    echo "</div>";
+                                                    echo '<div class="modal-body">';
+                                                        echo "{$row['card_desc']}";
+                                                    echo '</div>';
+                                                    echo '<div class="modal-footer">';
+                                                    echo '<form method="post" action="studentFlashCard.php">';
+                                                            echo "<button type='submit' class='btn btn-primary' name='markRead' data-bs-dismiss='modal'>Close</button>";
+                                                        echo '</form>';
+                                                        if(isset($_POST['markRead'])) {
+                                                            // unset else if condition remains true and points increase for all present cards
+                                                            unset($_POST['markRead']);
+                                                            $qr2 = "UPDATE studScore SET score=score+5 WHERE email='$mail' AND course_code='$ccode'";
+                                                            if(mysqli_query($con,$qr2)){
+                                                                echo "<script>window.location.replace('studentFlashCard.php')</script>";
+                                                            }
                                                         }
-                                                    }
+                                                echo '</div>';
                                             echo '</div>';
                                         echo '</div>';
                                     echo '</div>';
-                                echo '</div>';
-                            echo '</td>';
-                            // end - read card button
-                        echo '</tr>';
+                                echo '</td>';
+                                // end - read card button
+                            echo '</tr>';
+                        }
                     }
                 ?>
                 </tbody>

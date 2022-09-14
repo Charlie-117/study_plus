@@ -82,41 +82,48 @@
                     $result = mysqli_query($con,$qr);
                     $n = mysqli_num_rows($result);
                     $row = mysqli_fetch_array($result);
-                    for($i=1;$i <= $n; $i++, $row = mysqli_fetch_array($result)) {
-                        echo '<tr>';
-                            echo '<th scope="row">' . $i . '</th>';
-                            echo '<td>' . $row['card_id'] . '</td>';
-                            echo '<td>';
-                                echo "<button class='w-100 btn btn-sm btn-primary' data-bs-toggle='modal' data-bs-target='#Card{$row['card_id']}'>View</button>";
-                                echo "<div class='modal fade' id='Card{$row['card_id']}' data-bs-backdrop='static' data-bs-keyboard='false' tabindex='-1' aria-labelledby='CardLabel{$row['card_id']}' aria-hidden='true'>";
-                                    echo '<div class="modal-dialog">';
-                                        echo '<div class="modal-content">';
-                                            echo '<div class="modal-header">';
-                                                echo "<h5 class='modal-title' id='CardLabel{$row['card_id']}'>{$row['card_name']}</h5>";
-                                                echo "<button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>";
-                                                echo "</div>";
-                                                echo '<div class="modal-body">';
-                                                    echo "{$row['card_desc']}";
+
+                    if($n == 0) {
+                        echo "<tr><td class='text-center' colspan='5'>No Flashcards added</td></tr>";
+                    }
+                    else {
+                        for($i=1;$i <= $n; $i++, $row = mysqli_fetch_array($result)) {
+                            echo '<tr>';
+                                echo '<th scope="row">' . $i . '</th>';
+                                echo '<td>' . $row['card_id'] . '</td>';
+                                echo '<td>';
+                                    echo "<button class='w-100 btn btn-sm btn-primary' data-bs-toggle='modal' data-bs-target='#Card{$row['card_id']}'>View</button>";
+                                    echo "<div class='modal fade' id='Card{$row['card_id']}' data-bs-backdrop='static' data-bs-keyboard='false' tabindex='-1' aria-labelledby='CardLabel{$row['card_id']}' aria-hidden='true'>";
+                                        echo '<div class="modal-dialog">';
+                                            echo '<div class="modal-content">';
+                                                echo '<div class="modal-header">';
+                                                    echo "<h5 class='modal-title' id='CardLabel{$row['card_id']}'>{$row['card_name']}</h5>";
+                                                    echo "<button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>";
+                                                    echo "</div>";
+                                                    echo '<div class="modal-body">';
+                                                        echo "{$row['card_desc']}";
+                                                    echo '</div>';
+                                                    echo '<div class="modal-footer">';
+                                                    echo "<button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Close</button>";
                                                 echo '</div>';
-                                                echo '<div class="modal-footer">';
-                                                echo "<button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Close</button>";
                                             echo '</div>';
                                         echo '</div>';
                                     echo '</div>';
-                                echo '</div>';
-                            echo '</td>';
-                            echo '<td>';
-                                echo '<form method="post" action="educatorFlashCard.php">';
-                                echo "<button class='w-100 btn btn-sm btn-primary' type='submit' name='modifyCard' value='{$row['card_id']}'>Modify</button>";
-                                echo '</form>';
-                            echo '</td>';
-                            echo '<td>';
-                                echo '<form method="post" action="educatorFlashCard.php">';
-                                echo "<button class='w-100 btn btn-sm btn-primary' type='submit' name='deleteCard' value='{$row['card_id']}'>Delete</button>";
-                                echo '</form>';
-                            echo '</td>';
-                        echo '</tr>';
+                                echo '</td>';
+                                echo '<td>';
+                                    echo '<form method="post" action="educatorFlashCard.php">';
+                                    echo "<button class='w-100 btn btn-sm btn-primary' type='submit' name='modifyCard' value='{$row['card_id']}'>Modify</button>";
+                                    echo '</form>';
+                                echo '</td>';
+                                echo '<td>';
+                                    echo '<form method="post" action="educatorFlashCard.php">';
+                                    echo "<button class='w-100 btn btn-sm btn-primary' type='submit' name='deleteCard' value='{$row['card_id']}'>Delete</button>";
+                                    echo '</form>';
+                                echo '</td>';
+                            echo '</tr>';
+                        }
                     }
+                    
                 ?>
                 </tbody>
             </table>

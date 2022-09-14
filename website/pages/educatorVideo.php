@@ -83,23 +83,29 @@
                     $result = mysqli_query($con,$qr);
                     $n = mysqli_num_rows($result);
                     $row = mysqli_fetch_array($result);
-                    for($i=1;$i <= $n; $i++, $row = mysqli_fetch_array($result)) {
-                        echo '<tr>';
-                            echo '<th scope="row" class="text-center">' . $i . '</th>';
-                            echo '<td class="text-center">' . $row['video_id'] . '</td>';
-                            echo '<td>' . $row['video_name'] . '</td>';
-                            echo '<td>https://www.youtube.com/watch?v=' . $row['video_url'] . '</td>';
-                            echo '<td>';
-                                echo '<form method="post" action="educatorVideo.php">';
-                                echo "<button class='w-100 btn btn-sm btn-primary' type='submit' name='modifyVideo' value='{$row['video_id']}'>Modify</button>";
-                                echo '</form>';
-                            echo '</td>';
-                            echo '<td>';
-                                echo '<form method="post" action="educatorVideo.php">';
-                                echo "<button class='w-100 btn btn-sm btn-primary' type='submit' name='deleteVideo' value='{$row['video_id']}'>Delete</button>";
-                                echo '</form>';
-                            echo '</td>';
-                        echo '</tr>';
+
+                    if($n == 0) {
+                        echo "<tr><td class='text-center' colspan='6'>No Videos added</td></tr>";
+                    }
+                    else {
+                        for($i=1;$i <= $n; $i++, $row = mysqli_fetch_array($result)) {
+                            echo '<tr>';
+                                echo '<th scope="row" class="text-center">' . $i . '</th>';
+                                echo '<td class="text-center">' . $row['video_id'] . '</td>';
+                                echo '<td>' . $row['video_name'] . '</td>';
+                                echo '<td>https://www.youtube.com/watch?v=' . $row['video_url'] . '</td>';
+                                echo '<td>';
+                                    echo '<form method="post" action="educatorVideo.php">';
+                                    echo "<button class='w-100 btn btn-sm btn-primary' type='submit' name='modifyVideo' value='{$row['video_id']}'>Modify</button>";
+                                    echo '</form>';
+                                echo '</td>';
+                                echo '<td>';
+                                    echo '<form method="post" action="educatorVideo.php">';
+                                    echo "<button class='w-100 btn btn-sm btn-primary' type='submit' name='deleteVideo' value='{$row['video_id']}'>Delete</button>";
+                                    echo '</form>';
+                                echo '</td>';
+                            echo '</tr>';
+                        }
                     }
                 ?>
                 </tbody>

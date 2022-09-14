@@ -80,44 +80,49 @@
                 $n = mysqli_num_rows($result);
                 $row = mysqli_fetch_array($result);
                 $i = 1;
-                while($i <= $n) {
-                    echo '<div class="row justify-content-center">';
-                    for($card=0;$card <3 && $i<=$n;$card++, $row = mysqli_fetch_array($result)) {
-                        // quiz - played or not
-                        $qr2 = "SELECT * FROM studQuiz WHERE email='$mail' AND course_code='$ccode' AND quiz_id='{$row['quiz_id']}'";
-                        $result2 = mysqli_query($con,$qr2);
+                if($n == 0) {
+                    echo "<h3 class='text-center'>No quizzes available</h3>";
+                }
+                else {
+                    while($i <= $n) {
+                        echo '<div class="row justify-content-center">';
+                        for($card=0;$card <3 && $i<=$n;$card++, $row = mysqli_fetch_array($result)) {
+                            // quiz - played or not
+                            $qr2 = "SELECT * FROM studQuiz WHERE email='$mail' AND course_code='$ccode' AND quiz_id='{$row['quiz_id']}'";
+                            $result2 = mysqli_query($con,$qr2);
 
-                        echo '<div class="col-lg-4 col-md-6">';
-                            echo '<div class="card text-center border border-primary shadow-0 text-white" style="background-color:#2e3436;">';
-                                echo '<div class="card-body">';
-                                    echo "<h5 class='card-title'>Quiz - $i</h5>";
-                                    echo '<p class="card-text">';
-                                        echo "{$row['quiz_name']}";
-                                    echo '</p>';
-                                    $played = (mysqli_num_rows($result2) > 0)?1:0;
-                                    if($played == 1) {
-                                        echo '<span class="badge bg-success">Played';
-                                    }
-                                    else {
-                                        echo '<span class="badge bg-danger">Not Played';
-                                    }
-                                    echo '<br>';
-                                    echo '<br>';
-                                    echo '<form method="post" action="studentQuiz.php">';
-                                        echo "<input type='hidden' name='played' value='$played' required>";
-                                        echo "<input type='hidden' name='playQuizName' value='{$row['quiz_name']}' required>";
-                                        echo "<button type='submit' class='btn btn-primary' name='playQuiz' value='{$row['quiz_id']}'>Play</button>";
-                                    echo '</form>';
-                                    echo '</span>';
+                            echo '<div class="col-lg-4 col-md-6">';
+                                echo '<div class="card text-center border border-primary shadow-0 text-white" style="background-color:#2e3436;">';
+                                    echo '<div class="card-body">';
+                                        echo "<h5 class='card-title'>Quiz - $i</h5>";
+                                        echo '<p class="card-text">';
+                                            echo "{$row['quiz_name']}";
+                                        echo '</p>';
+                                        $played = (mysqli_num_rows($result2) > 0)?1:0;
+                                        if($played == 1) {
+                                            echo '<span class="badge bg-success">Played';
+                                        }
+                                        else {
+                                            echo '<span class="badge bg-danger">Not Played';
+                                        }
+                                        echo '<br>';
+                                        echo '<br>';
+                                        echo '<form method="post" action="studentQuiz.php">';
+                                            echo "<input type='hidden' name='played' value='$played' required>";
+                                            echo "<input type='hidden' name='playQuizName' value='{$row['quiz_name']}' required>";
+                                            echo "<button type='submit' class='btn btn-primary' name='playQuiz' value='{$row['quiz_id']}'>Play</button>";
+                                        echo '</form>';
+                                        echo '</span>';
+                                    echo '</div>';
                                 echo '</div>';
                             echo '</div>';
+                            mysqli_free_result($result2);
+                            $i++;
+                        }
                         echo '</div>';
-                        mysqli_free_result($result2);
-                        $i++;
+                        echo '<br>';
+                        echo '<br>';
                     }
-                    echo '</div>';
-                    echo '<br>';
-                    echo '<br>';
                 }
             ?>
 

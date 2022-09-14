@@ -93,19 +93,24 @@
                   </thead>
                   <tbody>
                      <?php
-                        $row = mysqli_fetch_array($result);
-                        for($i=1;$i <= $n; $i++, $row = mysqli_fetch_array($result)) {
-                              echo '<tr>';
-                                 echo '<th scope="row">' . $i . '</th>';
-                                 $qr2 = "SELECT name from stud WHERE email='{$row['email']}'";
-                                 $result2 = mysqli_query($con,$qr2);
-                                 $row2 = mysqli_fetch_array($result2); 
-                                 echo '<td>' . $row2['name'] . '</td>';
-                                 echo '<td>';
-                                 echo "{$row['score']}";
-                                 echo '</td>';
-                              echo '</tr>';
-                        }
+                        if($n == 0) {
+                           echo "<tr><td class='text-center' colspan='3'>No Students enrolled</td></tr>";
+                       }
+                       else {
+                           $row = mysqli_fetch_array($result);
+                           for($i=1;$i <= $n; $i++, $row = mysqli_fetch_array($result)) {
+                                 echo '<tr>';
+                                    echo '<th scope="row">' . $i . '</th>';
+                                    $qr2 = "SELECT name from stud WHERE email='{$row['email']}'";
+                                    $result2 = mysqli_query($con,$qr2);
+                                    $row2 = mysqli_fetch_array($result2); 
+                                    echo '<td>' . $row2['name'] . '</td>';
+                                    echo '<td>';
+                                    echo "{$row['score']}";
+                                    echo '</td>';
+                                 echo '</tr>';
+                           }
+                       }
                      ?>
                   </tbody>
                </table>

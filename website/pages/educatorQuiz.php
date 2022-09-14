@@ -82,23 +82,29 @@
                     $result = mysqli_query($con,$qr);
                     $n = mysqli_num_rows($result);
                     $row = mysqli_fetch_array($result);
-                    for($i=1;$i <= $n; $i++, $row = mysqli_fetch_array($result)) {
-                        echo '<tr>';
-                            echo '<th scope="row">' . $i . '</th>';
-                            echo '<td>' . $row['quiz_id'] . '</td>';
-                            echo '<td>' . $row['quiz_name'] . '</td>';
-                            echo '<td>';
-                                echo '<form method="post" action="educatorQuiz.php">';
-                                echo "<input type='hidden' class='form-control' id='floatingInput' name='viewQuizName' value='{$row['quiz_name']}' required>";
-                                echo "<button class='w-100 btn btn-sm btn-primary' type='submit' name='viewQuiz' value='{$row['quiz_id']}'>View/Modify</button>";
-                                echo '</form>';
-                            echo '</td>';
-                            echo '<td>';
-                                echo '<form method="post" action="educatorQuiz.php">';
-                                echo "<button class='w-100 btn btn-sm btn-primary' type='submit' name='deleteQuiz' value='{$row['quiz_id']}'>Delete</button>";
-                                echo '</form>';
-                            echo '</td>';
-                        echo '</tr>';
+
+                    if($n == 0) {
+                        echo "<tr><td class='text-center' colspan='5'>No Quizzes added</td></tr>";
+                    }
+                    else {
+                        for($i=1;$i <= $n; $i++, $row = mysqli_fetch_array($result)) {
+                            echo '<tr>';
+                                echo '<th scope="row">' . $i . '</th>';
+                                echo '<td>' . $row['quiz_id'] . '</td>';
+                                echo '<td>' . $row['quiz_name'] . '</td>';
+                                echo '<td>';
+                                    echo '<form method="post" action="educatorQuiz.php">';
+                                    echo "<input type='hidden' class='form-control' id='floatingInput' name='viewQuizName' value='{$row['quiz_name']}' required>";
+                                    echo "<button class='w-100 btn btn-sm btn-primary' type='submit' name='viewQuiz' value='{$row['quiz_id']}'>View/Modify</button>";
+                                    echo '</form>';
+                                echo '</td>';
+                                echo '<td>';
+                                    echo '<form method="post" action="educatorQuiz.php">';
+                                    echo "<button class='w-100 btn btn-sm btn-primary' type='submit' name='deleteQuiz' value='{$row['quiz_id']}'>Delete</button>";
+                                    echo '</form>';
+                                echo '</td>';
+                            echo '</tr>';
+                        }
                     }
                 ?>
                 </tbody>
