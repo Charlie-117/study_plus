@@ -23,11 +23,13 @@
     }
     $qr = "SELECT * FROM eduQuiz WHERE course_code='$ccode' AND quiz_id='$quizID' ORDER BY quiz_qstn_id";
     $result = mysqli_query($con,$qr);
+
     // QTN = QuestionTotalNum
     $_SESSION['quizQTN'] = mysqli_num_rows($result);
-    for($i=1;$i<=$_SESSION['quizQAC'];$i++) {
-        $row = mysqli_fetch_array($result);
-    }
+
+    // Seek to the current question row and store result
+    mysqli_data_seek($result,$_SESSION['quizQAC']-1);
+    $row = mysqli_fetch_array($result);
 
 ?>
 
