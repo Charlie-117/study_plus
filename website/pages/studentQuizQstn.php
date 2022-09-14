@@ -84,6 +84,16 @@
 
 
       <!-- content -->
+
+      <?php
+
+        if($_SESSION['quizQTN'] == 0) {
+            echo "<script>alert('No Questions are added in the quiz yet')</script>";
+            echo "<script>window.location.replace('studentQuiz.php')</script>";
+        }
+
+      ?>
+
       <section class="ms-5">
         <?php echo "<h2>Playing Quiz - " . $_SESSION['quizName'] . "</h2>"; ?>
         <br><br>
