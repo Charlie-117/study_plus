@@ -122,8 +122,8 @@
          <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
             <p class="col-md-4 mb-0">© 2022 Tony</p>
             <ul class="nav col-md-4 justify-content-end">
-               <li class="nav-item"><a href="../index.html" class="nav-link px-2">Home</a></li>
-               <li class="nav-item"><a href="about.html" class="nav-link px-2">About</a></li>
+               <li class="nav-item"><a href="educatorHome.php" class="nav-link px-2">Home</a></li>
+               <li class="nav-item"><a href="logout.php" class="nav-link px-2">Logout</a></li>
             </ul>
          </footer>
       </div>
