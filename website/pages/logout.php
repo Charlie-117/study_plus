@@ -30,7 +30,7 @@
       <!-- content -->
 
       <div class="px-4 py-5 my-5 text-center">
-         <h1 class="display-1 fw-bold">Logged out successfully</h1>
+         <h1 class="display-5 fw-bold">Logged out successfully</h1>
          <br>
          <div class="col-lg-6 mx-auto">
             <p class="lead mb-4">
