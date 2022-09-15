@@ -6,19 +6,15 @@
 
         // grab data from form
         $name = $_POST['name'];
-        $name = stripslashes($name);
         $name = mysqli_real_escape_string($con,$name);
 
         $mail = $_POST['email'];
-        $mail = stripslashes($mail);
         $mail = mysqli_real_escape_string($con,$mail);
 
         $pass = $_POST['password'];
-        $pass = stripslashes($pass);
         $pass = mysqli_real_escape_string($con,$pass);
 
         $code = $_POST['code'];
-        $code = stripslashes($code);
         $code = mysqli_real_escape_string($con,$code);
 
         // check if email already in db
@@ -37,6 +33,10 @@
         elseif (mysqli_num_rows($result2) == 0) {
             echo "<script>alert('The code does not exist.')</script>";
             mysqli_free_result($result2);
+        }
+
+        elseif ((strlen($pass) < 6)) {
+            echo "<script>alert('Password is weak, please use more than 5 characters.')</script>";
         }
 
         else {

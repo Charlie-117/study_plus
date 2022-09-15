@@ -6,27 +6,21 @@
 
         // grab data from form
         $name = $_POST['name'];
-        $name = stripslashes($name);
         $name = mysqli_real_escape_string($con,$name);
 
         $mail = $_POST['email'];
-        $mail = stripslashes($mail);
         $mail = mysqli_real_escape_string($con,$mail);
 
         $pass = $_POST['password'];
-        $pass = stripslashes($pass);
         $pass = mysqli_real_escape_string($con,$pass);
 
         $code = $_POST['code'];
-        $code = stripslashes($code);
         $code = mysqli_real_escape_string($con,$code);
 
         $course = $_POST['course'];
-        $course = stripslashes($course);
         $course = mysqli_real_escape_string($con,$course);
 
         $course_desc = $_POST['courseDesc'];
-        $course_desc = stripslashes($course_desc);
         $course_desc = mysqli_real_escape_string($con,$course_desc);
 
 
@@ -46,6 +40,10 @@
         elseif (mysqli_num_rows($result2) > 0) {
             echo "<script>alert('The code is already in use.')</script>";
             mysqli_free_result($result2);
+        }
+
+        elseif ((strlen($pass) < 6)) {
+            echo "<script>alert('Password is weak, please use more than 5 characters.')</script>";
         }
 
         else {
