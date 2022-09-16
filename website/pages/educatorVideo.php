@@ -125,10 +125,10 @@
                         $result = mysqli_query($con, $qr);
                         $row = mysqli_fetch_array($result);
                         echo '<div class="form-floating">';
-                            echo "<textarea name='videoName' placeholder='" . stripslashes($row['video_name']) . "' form='modifyVideo' required></textarea>";
+                            echo "<textarea name='videoName' placeholder='" . stripslashes($row['video_name']) . "' form='modifyVideo' cols='25' rows='3' required></textarea>";
                         echo '</div>';
                         echo '<div class="form-floating">';
-                            echo "<textarea name='videoURL' placeholder='{$row['video_url']}' form='modifyVideo' required></textarea>";
+                            echo "<textarea name='videoURL' placeholder='{$row['video_url']}' form='modifyVideo' cols='25' rows='3' required></textarea>";
                             echo "<input type='hidden' class='form-control' id='floatingInput' name='modifyVideo' value='$videoToModify' required>";
                         echo '</div>';
                         echo '<button class="btn btn-sm btn-primary" type="submit" name="videoModified">Modify</button>';

@@ -142,10 +142,10 @@
                         $result = mysqli_query($con, $qr);
                         $row = mysqli_fetch_array($result);
                         echo '<div class="form-floating">';
-                            echo "<br><textarea name='cardName' placeholder='" . stripslashes($row['card_name']) . "' form='modifyCard' required></textarea>";
+                            echo "<br><textarea name='cardName' placeholder='" . stripslashes($row['card_name']) . "' form='modifyCard' cols='25' rows='3' required></textarea>";
                         echo '</div>';
                         echo '<div class="form-floating">';
-                            echo "<br><textarea name='cardDesc' placeholder='" . stripslashes($row['card_desc']) . "' form='modifyCard' required></textarea>";
+                            echo "<br><textarea name='cardDesc' placeholder='" . stripslashes($row['card_desc']) . "' form='modifyCard' cols='25' rows='3' required></textarea>";
                             echo "<input type='hidden' class='form-control' id='floatingInput' name='modifyCard' value='$cardToModify' required>";
                         echo '</div>';
                         echo '<br><button class="btn btn-sm btn-primary" type="submit" name="cardModified">Modify</button>';
@@ -178,10 +178,10 @@
                             echo "<label class='text-muted' for='floatingInput'>Card ID</label>";
                         echo '</div>';
                         echo '<div class="form-floating">';
-                            echo "<br><textarea name='cardName' placeholder='Card Name' form='addCard' required></textarea>";
+                            echo "<br><textarea name='cardName' placeholder='Card Name' form='addCard' cols='25' rows='3' required></textarea>";
                         echo '</div>';
                         echo '<div class="form-floating">';
-                            echo "<br><textarea name='cardDesc' placeholder='Card Description' form='addCard' required></textarea>";
+                            echo "<br><textarea name='cardDesc' placeholder='Card Description' form='addCard' cols='25' rows='3' required></textarea>";
                         echo '</div>';
                         echo '<br><button class="btn btn-sm btn-primary" type="submit" name="cardAdded">Add flashcard</button>';
                     echo '</form>';

@@ -129,7 +129,7 @@
             <label class="text-muted" for="floatingInput">Course Name</label>
          </div>
          <div class="form-floating">
-            <textarea name='courseDesc' placeholder='Course Description' form='eduRegister' required></textarea>
+            <textarea name='courseDesc' placeholder='Course Description' form='eduRegister' cols='25' rows='3' required></textarea>
          </div>
          <br>
          <button class="w-100 btn btn-lg btn-primary" type="submit" name="submit">Register</button>

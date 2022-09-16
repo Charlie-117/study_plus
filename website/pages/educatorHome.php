@@ -113,7 +113,7 @@
                             echo '<label class="text-muted" for="floatingInput">Course Name</label>';
                         echo '</div>';
                         echo '<div class="form-floating">';
-                            echo "<textarea name='courseDesc' placeholder='Course Description' form='addCourse' required></textarea>";
+                            echo "<textarea name='courseDesc' placeholder='Course Description' form='addCourse' cols='25' rows='3' required></textarea>";
                         echo '</div>';
                         echo '<button class="btn btn-sm btn-primary" type="submit" name="courseCreated">Add</button>';
                     echo '</form>';
