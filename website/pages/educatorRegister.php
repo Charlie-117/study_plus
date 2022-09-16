@@ -121,7 +121,7 @@
             <label class="text-muted" for="floatingPassword">Password</label>
          </div>
          <div class="form-floating">
-            <input type="text" class="form-control" id="floatingInput" placeholder="Code" name="code" required>
+            <input type="number" class="form-control" id="floatingInput" placeholder="Code" name="code" required>
             <label class="text-muted" for="floatingInput">Code</label>
          </div>
          <div class="form-floating">

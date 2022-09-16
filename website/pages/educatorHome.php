@@ -105,7 +105,7 @@
                 if(isset($_POST['createCourse']) || isset($_POST['courseCreated'])) {
                     echo '<form class="form-signin w-100 m-auto" method="post" action="educatorHome.php" enctype="multipart/form-data" id="addCourse">';
                         echo '<div class="form-floating">';
-                            echo '<input type="text" class="form-control" id="floatingInput" placeholder="Code" name="code" required>';
+                            echo '<input type="number" class="form-control" id="floatingInput" placeholder="Code" name="code" required>';
                             echo '<label class="text-muted" for="floatingInput">Code</label>';
                         echo '</div>';
                         echo '<div class="form-floating">';

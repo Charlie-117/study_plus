@@ -117,9 +117,10 @@
             <label class="text-muted" for="floatingPassword">Password</label>
          </div>
          <div class="form-floating">
-            <input type="text" class="form-control" id="floatingInput" placeholder="Code" name="code" required>
+            <input type="number" class="form-control" id="floatingInput" placeholder="Code" name="code" required>
             <label class="text-muted" for="floatingInput">Code</label>
          </div>
+         <br>
          <button class="w-100 btn btn-lg btn-primary" type="submit" name="submit">Register</button>
       </form>
       <h5 align="center"><a href="studentLogin.php">Already have an account? Login here</a></h5>

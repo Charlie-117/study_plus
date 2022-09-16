@@ -121,9 +121,10 @@
                 if(isset($_POST['enrollCourse']) || isset($_POST['courseEnrolled'])) {
                     echo '<form class="form-signin w-100 m-auto" method="post" action="studentHome.php" enctype="multipart/form-data">';
                         echo '<div class="form-floating">';
-                            echo '<input type="text" class="form-control" id="floatingInput" placeholder="Code" name="code" required>';
+                            echo '<input type="number" class="form-control" id="floatingInput" placeholder="Code" name="code" required>';
                             echo '<label class="text-muted" for="floatingInput">Code</label>';
                         echo '</div>';
+                        echo '<br>';
                         echo '<button class="btn btn-sm btn-primary" type="submit" name="courseEnrolled">Add</button>';
                     echo '</form>';
 
