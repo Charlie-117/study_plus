@@ -97,11 +97,11 @@
                                         echo '<div class="modal-dialog">';
                                             echo '<div class="modal-content">';
                                                 echo '<div class="modal-header">';
-                                                    echo "<h5 class='modal-title' id='CardLabel{$row['card_id']}'>{$row['card_name']}</h5>";
+                                                    echo "<h5 class='modal-title' id='CardLabel{$row['card_id']}'>" . stripslashes($row['card_name']) . "</h5>";
                                                     echo "<button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>";
                                                     echo "</div>";
                                                     echo '<div class="modal-body">';
-                                                        echo "{$row['card_desc']}";
+                                                        echo stripslashes($row['card_desc']);
                                                     echo '</div>';
                                                     echo '<div class="modal-footer">';
                                                     echo "<button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Close</button>";
@@ -142,25 +142,22 @@
                         $result = mysqli_query($con, $qr);
                         $row = mysqli_fetch_array($result);
                         echo '<div class="form-floating">';
-                            echo "<br><textarea name='cardName' placeholder='{$row['card_name']}' form='modifyCard' required></textarea>";
+                            echo "<br><textarea name='cardName' placeholder='" . stripslashes($row['card_name']) . "' form='modifyCard' required></textarea>";
                         echo '</div>';
                         echo '<div class="form-floating">';
-                            echo "<br><textarea name='cardDesc' placeholder='{$row['card_desc']}' form='modifyCard' required></textarea>";
+                            echo "<br><textarea name='cardDesc' placeholder='" . stripslashes($row['card_desc']) . "' form='modifyCard' required></textarea>";
                             echo "<input type='hidden' class='form-control' id='floatingInput' name='modifyCard' value='$cardToModify' required>";
                         echo '</div>';
                         echo '<br><button class="btn btn-sm btn-primary" type="submit" name="cardModified">Modify</button>';
                     echo '</form>';
 
                     if(isset($_POST['cardModified'])) {
-                        $modifiedCardName = $_POST['cardName'];
-                        $modifiedCardDesc = $_POST['cardDesc'];
+                        $modifiedCardName = mysqli_real_escape_string($con,$_POST['cardName']);
+                        $modifiedCardDesc = mysqli_real_escape_string($con,$_POST['cardDesc']);
                         $cardToModify = $_POST['modifyCard'];
                         $qr = "UPDATE eduCard SET card_name='$modifiedCardName' , card_desc='$modifiedCardDesc' WHERE course_code='$ccode' AND card_id='$cardToModify'";
                         if(mysqli_query($con,$qr)) {
                             echo "<script>window.location.replace('educatorFlashCard.php')</script>";
-                        }
-                        else {
-                            echo "<script>alert('$modifiedCardName $modifiedCardDesc $cardToModify oof.')</script>";
                         }
                     }
                 }
@@ -190,8 +187,8 @@
                     echo '</form>';
 
                     if(isset($_POST['cardAdded'])) {
-                        $addedCardName = $_POST['cardName'];
-                        $addedCardDesc = $_POST['cardDesc'];
+                        $addedCardName = mysqli_real_escape_string($con,$_POST['cardName']);
+                        $addedCardDesc = mysqli_real_escape_string($con,$_POST['cardDesc']);
                         $addedCardId = $_POST['cardID'];
                         $qr = "SELECT card_id from eduCard WHERE card_id='$addedCardId' AND course_code='$ccode'";
                         $result = mysqli_query($con,$qr);

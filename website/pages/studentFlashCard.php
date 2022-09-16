@@ -89,7 +89,7 @@
                         for($i=1;$i <= $n; $i++, $row = mysqli_fetch_array($result)) {
                             echo '<tr>';
                                 echo '<th class="text-center" scope="row">' . $i . '</th>';
-                                echo '<td>' .$row['card_name'] . '</td>';
+                                echo '<td>' . stripslashes($row['card_name']) . '</td>';
                                 echo '<td>';
                                     // read card button
                                     echo "<button class='w-100 btn btn-sm btn-primary' data-bs-toggle='modal' data-bs-target='#card{$row['card_id']}'>Read</button>";
@@ -97,11 +97,11 @@
                                         echo '<div class="modal-dialog">';
                                             echo '<div class="modal-content">';
                                                 echo '<div class="modal-header">';
-                                                    echo "<h5 class='modal-title' id='cardLabel{$row['card_id']}'>{$row['card_name']}</h5>";
+                                                    echo "<h5 class='modal-title' id='cardLabel{$row['card_id']}'>" . stripslashes($row['card_name']) . "</h5>";
                                                     echo "<button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>";
                                                     echo "</div>";
                                                     echo '<div class="modal-body">';
-                                                        echo "{$row['card_desc']}";
+                                                        echo stripslashes($row['card_desc']);
                                                     echo '</div>';
                                                     echo '<div class="modal-footer">';
                                                     echo '<form method="post" action="studentFlashCard.php">';

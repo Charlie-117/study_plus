@@ -8,11 +8,9 @@
         // grab data from form
 
         $mail = $_POST['email'];
-        $mail = stripslashes($mail);
         $mail = mysqli_real_escape_string($con,$mail);
 
         $pass = $_POST['password'];
-        $pass = stripslashes($pass);
         $pass = mysqli_real_escape_string($con,$pass);
 
         // check if email is not in db
@@ -33,7 +31,7 @@
                // check if password is correct
                if($row['password'] == $pass) {
                   // set session vars for future use
-                  $_SESSION['name'] = $row['name'];
+                  $_SESSION['name'] = stripslashes($row['name']);
                   $_SESSION['mail'] = $mail;
                   mysqli_free_result($result);
                   echo "<script>window.location.replace('educatorHome.php')</script>";

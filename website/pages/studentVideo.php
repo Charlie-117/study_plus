@@ -64,7 +64,7 @@
       <section class="ms-5">
         <?php echo "<h2>Hello, " . $_SESSION['name'] . "</h2>"; ?>
         <section class="ms-5">
-            <?php echo "<h5>Videos in course: " . $_SESSION['course'] . " - " . $_SESSION['courseName'] . "</h5>"; ?>
+            <?php echo "<h5>Videos in course: " . $_SESSION['course'] . " - " . stripslashes($_SESSION['courseName']) . "</h5>"; ?>
 
             <div class="container">
 
@@ -89,7 +89,7 @@
                                     echo '<div class="col-lg-4 col-md-6">';
                                         echo '<div class="card text-center border border-primary shadow-0 text-white" style="background-color:#2e3436;">';
                                         echo '<div class="card-body">';
-                                            echo "<h5 class='card-title'>$i - {$row['video_name']}</h5>";
+                                            echo "<h5 class='card-title'>$i - " . stripslashes($row['video_name']) . "</h5>";
                                             echo '<br>';
                                             $watched = (mysqli_num_rows($result2) > 0)?1:0;
                                             if($watched == 1) {

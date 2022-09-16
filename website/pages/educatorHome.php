@@ -4,7 +4,7 @@
     session_start();
     if(isset($_GET['selCourse'])) {
         $_SESSION['course'] = $_GET['selCourse'];
-        $_SESSION['courseName'] = $_GET['selCourseName'];
+        $_SESSION['courseName'] = stripslashes($_GET['selCourseName']);
     }
     
 ?>
@@ -84,7 +84,7 @@
                         echo '<tr>';
                             echo '<th scope="row">' . $i . '</th>';
                             echo '<td>' . $row['code'] . '</td>';
-                            echo '<td>' .$row['course'] . '</td>';
+                            echo '<td>' . stripslashes($row['course']) . '</td>';
                             echo '<td>';
                                 echo '<form method="get" action="educatorHome.php">';
                                 echo '<input type="hidden" name="selCourseName" value="' . $row['course'] . '" required>';
@@ -130,8 +130,8 @@
                         }
                         else {
                             $cmail = $_SESSION['mail'];
-                            $ccourse = $_POST['course'];
-                            $course_desc = $_POST['courseDesc'];
+                            $ccourse = mysqli_real_escape_string($con,$_POST['course']);
+                            $course_desc = mysqli_real_escape_string($con,$_POST['courseDesc']);
                             $qr = "INSERT INTO eduCode (email,code,course,course_desc) VALUES ('$cmail','$ccode','$ccourse','$course_desc')";
                             mysqli_query($con,$qr);
                             echo "<script>alert('Course added successfully.')</script>";

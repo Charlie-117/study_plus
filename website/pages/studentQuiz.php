@@ -96,7 +96,7 @@
                                     echo '<div class="card-body">';
                                         echo "<h5 class='card-title'>Quiz - $i</h5>";
                                         echo '<p class="card-text">';
-                                            echo "{$row['quiz_name']}";
+                                            echo stripslashes($row['quiz_name']);
                                         echo '</p>';
                                         $played = (mysqli_num_rows($result2) > 0)?1:0;
                                         if($played == 1) {
@@ -109,7 +109,7 @@
                                         echo '<br>';
                                         echo '<form method="post" action="studentQuiz.php">';
                                             echo "<input type='hidden' name='played' value='$played' required>";
-                                            echo "<input type='hidden' name='playQuizName' value='{$row['quiz_name']}' required>";
+                                            echo "<input type='hidden' name='playQuizName' value='" . stripslashes($row['quiz_name']) . "' required>";
                                             echo "<button type='submit' class='btn btn-primary' name='playQuiz' value='{$row['quiz_id']}'>Play</button>";
                                         echo '</form>';
                                         echo '</span>';
@@ -137,7 +137,7 @@
         if(isset($_POST['playQuiz'])) {
             $quizToMark = $_POST['playQuiz'];
             $_SESSION['quizID'] = $quizToMark;
-            $_SESSION['quizName'] = $_POST['playQuizName'];
+            $_SESSION['quizName'] = stripslashes($_POST['playQuizName']);
             $_SESSION['quizPlayed'] = $_POST['played'];
             if(!($_SESSION['quizPlayed'])) {
                 $qr3 = "INSERT INTO studQuiz (email,course_code,quiz_id) VALUES ('$mail','$ccode','$quizToMark')";

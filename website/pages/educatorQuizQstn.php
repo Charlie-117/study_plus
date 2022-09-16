@@ -8,7 +8,7 @@
     }
 
     $ccode = $_SESSION['course'];
-    $quizName = $_SESSION['quizName'];
+    $quizName = stripslashes($_SESSION['quizName']);
     $quizID = $_SESSION['quizID'];
 
 ?>
@@ -101,7 +101,7 @@
                                                 echo "<button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>";
                                                 echo "</div>";
                                                 echo '<div class="modal-body">';
-                                                    echo "{$row['quiz_qstn']}";
+                                                    echo stripslashes($row['quiz_qstn']);
                                                 echo '</div>';
                                                 echo '<div class="modal-footer">';
                                                 echo "<button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Close</button>";
@@ -123,16 +123,16 @@
                                                 echo "</div>";
                                                 echo '<div class="modal-body">';
                                                     echo "Option A: ";
-                                                    echo "{$row['opt_a']}";
+                                                    echo stripslashes($row['opt_a']);
                                                     echo "<br><br>";
                                                     echo "Option B: ";
-                                                    echo "{$row['opt_b']}";
+                                                    echo stripslashes($row['opt_b']);
                                                     echo "<br><br>";
                                                     echo "Option C: ";
-                                                    echo "{$row['opt_c']}";
+                                                    echo stripslashes($row['opt_c']);
                                                     echo "<br><br>";
                                                     echo "Option D: ";
-                                                    echo "{$row['opt_d']}";
+                                                    echo stripslashes($row['opt_d']);
                                                 echo '</div>';
                                                 echo '<div class="modal-footer">';
                                                 echo "<button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Close</button>";
@@ -231,11 +231,11 @@
 
                     if(isset($_POST['quizQstnAdded'])) {
                         $addedQstnId = $_POST['qstnID'];
-                        $addedQstn = $_POST['quiz_qstn'];
-                        $addedOptA = $_POST['opt_a'];
-                        $addedOptB = $_POST['opt_b'];
-                        $addedOptC = $_POST['opt_c'];
-                        $addedOptD = $_POST['opt_d'];
+                        $addedQstn = mysqli_real_escape_string($con,$_POST['quiz_qstn']);
+                        $addedOptA = mysqli_real_escape_string($con,$_POST['opt_a']);
+                        $addedOptB = mysqli_real_escape_string($con,$_POST['opt_b']);
+                        $addedOptC = mysqli_real_escape_string($con,$_POST['opt_c']);
+                        $addedOptD = mysqli_real_escape_string($con,$_POST['opt_d']);
                         $addedQstnAns = $_POST['quiz_ans'];
 
                         $qr = "SELECT quiz_qstn_id FROM eduQuiz WHERE quiz_qstn_id='$addedQstnId' AND quiz_id='$quizID' AND course_code='$ccode'";

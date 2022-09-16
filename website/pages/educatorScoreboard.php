@@ -104,7 +104,7 @@
                                     $qr2 = "SELECT name from stud WHERE email='{$row['email']}'";
                                     $result2 = mysqli_query($con,$qr2);
                                     $row2 = mysqli_fetch_array($result2); 
-                                    echo '<td>' . $row2['name'] . '</td>';
+                                    echo '<td>' . stripslashes($row2['name']) . '</td>';
                                     echo '<td>';
                                     echo "{$row['score']}";
                                     echo '</td>';

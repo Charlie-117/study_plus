@@ -92,7 +92,7 @@
                             echo '<tr>';
                                 echo '<th scope="row" class="text-center">' . $i . '</th>';
                                 echo '<td class="text-center">' . $row['video_id'] . '</td>';
-                                echo '<td>' . $row['video_name'] . '</td>';
+                                echo '<td>' . stripslashes($row['video_name']) . '</td>';
                                 echo '<td>https://www.youtube.com/watch?v=' . $row['video_url'] . '</td>';
                                 echo '<td>';
                                     echo '<form method="post" action="educatorVideo.php">';
@@ -125,7 +125,7 @@
                         $result = mysqli_query($con, $qr);
                         $row = mysqli_fetch_array($result);
                         echo '<div class="form-floating">';
-                            echo "<textarea name='videoName' placeholder='{$row['video_name']}' form='modifyVideo' required></textarea>";
+                            echo "<textarea name='videoName' placeholder='" . stripslashes($row['video_name']) . "' form='modifyVideo' required></textarea>";
                         echo '</div>';
                         echo '<div class="form-floating">';
                             echo "<textarea name='videoURL' placeholder='{$row['video_url']}' form='modifyVideo' required></textarea>";
@@ -135,7 +135,7 @@
                     echo '</form>';
 
                     if(isset($_POST['videoModified'])) {
-                        $modifiedVideoName = $_POST['videoName'];
+                        $modifiedVideoName = mysqli_real_escape_string($con,$_POST['videoName']);
                         $modifiedVideoUrl = $_POST['videoURL'];
                         $yt_regex_str = "/https:\/\/www.youtube.com\/watch\?v=/";
                         $modifiedVideoUrl = preg_replace($yt_regex_str, "", $modifiedVideoUrl);
@@ -174,7 +174,7 @@
                     echo '</form>';
 
                     if(isset($_POST['videoAdded'])) {
-                        $addedVideoName = $_POST['videoName'];
+                        $addedVideoName = mysqli_real_escape_string($con,$_POST['videoName']);
                         $addedVideoUrl = $_POST['videoURL'];
                         $yt_regex_str = "/https:\/\/www.youtube.com\/watch\?v=/";
                         $addedVideoUrl = preg_replace($yt_regex_str, "", $addedVideoUrl);

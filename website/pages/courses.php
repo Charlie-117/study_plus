@@ -77,9 +77,9 @@
                         echo '<div class="col-lg-4 col-md-6">';
                             echo '<div class="card text-center border border-primary shadow-0 text-white" style="background-color:#2e3436;">';
                                 echo '<div class="card-body">';
-                                    echo "<h5 class='card-title'>{$row['course']}</h5>";
+                                    echo "<h5 class='card-title'>" . stripslashes($row['course']) . "</h5>";
                                     echo '<p class="card-text">';
-                                        echo "Course code - {$row['code']} <br> Taught by - {$row2['name']} <br><br> {$row['course_desc']}";
+                                        echo "Course code - {$row['code']} <br> Taught by - " . stripslashes($row2['name']) . "<br><br>" . stripslashes($row['course_desc']);
                                     echo '</p>';
                                 echo '</div>';
                             echo '</div>';

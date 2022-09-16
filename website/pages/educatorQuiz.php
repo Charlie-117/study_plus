@@ -91,7 +91,7 @@
                             echo '<tr>';
                                 echo '<th scope="row">' . $i . '</th>';
                                 echo '<td>' . $row['quiz_id'] . '</td>';
-                                echo '<td>' . $row['quiz_name'] . '</td>';
+                                echo '<td>' . stripslashes($row['quiz_name']) . '</td>';
                                 echo '<td>';
                                     echo '<form method="post" action="educatorQuiz.php">';
                                     echo "<input type='hidden' class='form-control' id='floatingInput' name='viewQuizName' value='{$row['quiz_name']}' required>";
@@ -118,7 +118,7 @@
 
                 if(isset($_POST['viewQuiz'])) {
                     $_SESSION['quizID'] = $_POST['viewQuiz'];
-                    $_SESSION['quizName'] = $_POST['viewQuizName'];
+                    $_SESSION['quizName'] = stripslashes($_POST['viewQuizName']);
                     echo "<script>window.location.replace('educatorQuizQstn.php')</script>";
                 }
 
@@ -146,7 +146,7 @@
                     echo '</form>';
 
                     if(isset($_POST['quizAdded'])) {
-                        $addedQuizName = $_POST['quizName'];
+                        $addedQuizName = mysqli_real_escape_string($con,$_POST['quizName']);
                         $addedQuizId = $_POST['quizID'];
                         $qr = "SELECT quiz_id FROM eduQzName WHERE quiz_id='$addedQuizId' AND course_code='$ccode'";
                         $result = mysqli_query($con,$qr);
