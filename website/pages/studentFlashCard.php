@@ -93,7 +93,7 @@
                                 echo '<td>';
                                     // read card button
                                     echo "<button class='w-100 btn btn-sm btn-primary' data-bs-toggle='modal' data-bs-target='#card{$row['card_id']}'>Read</button>";
-                                    echo "<div class='modal fade' id='card{$row['card_id']}' data-bs-backdrop='static' data-bs-keyboard='false' tabindex='-1' aria-labelledby='VideoLabel{$row['video_id']}' aria-hidden='true'>";
+                                    echo "<div class='modal fade' id='card{$row['card_id']}' data-bs-backdrop='static' data-bs-keyboard='false' tabindex='-1' aria-labelledby='cardLabel{$row['card_id']}' aria-hidden='true'>";
                                         echo '<div class="modal-dialog">';
                                             echo '<div class="modal-content">';
                                                 echo '<div class="modal-header">';
