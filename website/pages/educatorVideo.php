@@ -136,13 +136,18 @@
 
                     if(isset($_POST['videoModified'])) {
                         $modifiedVideoName = mysqli_real_escape_string($con,$_POST['videoName']);
-                        $modifiedVideoUrl = $_POST['videoURL'];
                         $yt_regex_str = "/https:\/\/www.youtube.com\/watch\?v=/";
-                        $modifiedVideoUrl = preg_replace($yt_regex_str, "", $modifiedVideoUrl);
-                        $videoToModify = $_POST['modifyVideo'];
-                        $qr = "UPDATE eduVid SET video_name='$modifiedVideoName' , video_url='$modifiedVideoUrl' WHERE course_code='$ccode' AND video_id='$videoToModify'";
-                        if(mysqli_query($con,$qr)) {
-                            echo "<script>window.location.replace('educatorVideo.php')</script>";
+                        $modifiedVideoUrl = $_POST['videoURL'];
+                        if (preg_match($yt_regex_str, $modifiedVideoUrl)) {
+                            $modifiedVideoUrl = preg_replace($yt_regex_str, "", $modifiedVideoUrl);
+                            $videoToModify = $_POST['modifyVideo'];
+                            $qr = "UPDATE eduVid SET video_name='$modifiedVideoName' , video_url='$modifiedVideoUrl' WHERE course_code='$ccode' AND video_id='$videoToModify'";
+                            if(mysqli_query($con,$qr)) {
+                                echo "<script>window.location.replace('educatorVideo.php')</script>";
+                            }
+                        }
+                        else {
+                            echo "<script>alert('Enter valid YouTube URL.')</script>";
                         }
                     }
                 }
@@ -175,24 +180,29 @@
 
                     if(isset($_POST['videoAdded'])) {
                         $addedVideoName = mysqli_real_escape_string($con,$_POST['videoName']);
-                        $addedVideoUrl = $_POST['videoURL'];
                         $yt_regex_str = "/https:\/\/www.youtube.com\/watch\?v=/";
-                        $addedVideoUrl = preg_replace($yt_regex_str, "", $addedVideoUrl);
-                        $addedVideoId = $_POST['videoID'];
-
-                        $qr = "SELECT video_id FROM eduVid WHERE video_id='$addedVideoId' AND course_code='$ccode'";
-                        $result = mysqli_query($con,$qr);
-                        $n = mysqli_num_rows($result);
-                        if($n > 0) {
-                            echo "<script>alert('Video ID already exists.')</script>";
-                            echo "<script>window.location.replace('educatorVideo.php')</script>";
-                        }
-                        else {
-                            $qr = "INSERT INTO eduVid (course_code, video_id, video_name, video_url) VALUES ('$ccode', '$addedVideoId', '$addedVideoName', '$addedVideoUrl')";
-                            if(mysqli_query($con,$qr)) {
-                                echo "<script>alert('Video Added.')</script>";
+                        $addedVideoUrl = $_POST['videoURL'];
+                        if (preg_match($yt_regex_str, $addedVideoUrl)) {
+                            $addedVideoUrl = preg_replace($yt_regex_str, "", $addedVideoUrl);
+                            $addedVideoId = $_POST['videoID'];
+    
+                            $qr = "SELECT video_id FROM eduVid WHERE video_id='$addedVideoId' AND course_code='$ccode'";
+                            $result = mysqli_query($con,$qr);
+                            $n = mysqli_num_rows($result);
+                            if($n > 0) {
+                                echo "<script>alert('Video ID already exists.')</script>";
                                 echo "<script>window.location.replace('educatorVideo.php')</script>";
                             }
+                            else {
+                                $qr = "INSERT INTO eduVid (course_code, video_id, video_name, video_url) VALUES ('$ccode', '$addedVideoId', '$addedVideoName', '$addedVideoUrl')";
+                                if(mysqli_query($con,$qr)) {
+                                    echo "<script>alert('Video Added.')</script>";
+                                    echo "<script>window.location.replace('educatorVideo.php')</script>";
+                                }
+                            } 
+                        }
+                        else {
+                            echo "<script>alert('Enter valid YouTube URL.')</script>";
                         }
                     }
                 }
