@@ -1,18 +1,73 @@
 <!doctype html>
 <html lang="en">
 
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-  </head>
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Study+</title>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+   </head>
 
-  <body>
+   <body class="bg-dark text-white">
 
-    <h1>Hello, world!</h1>
+      <!-- navigation bar -->
+      <nav class="navbar navbar-expand-lg navbar-dark">
+         <div class="container-fluid">
+            <span class="navbar-brand mb-0 h1">Study+</span>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+               <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+               </li>
+               <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Login
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                     <li><a class="dropdown-item" href="pages/studentLogin.html">Student login</a></li>
+                     <li><a class="dropdown-item" href="pages/teacherLogin.html">Teacher login</a></li>
+                  </ul>
+               <li class="nav-item">
+                  <a class="nav-link" href="pages/about.html">About</a>
+               </li>
+            </div>
+         </div>
+      </nav>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-  </body>
+
+      <!-- content -->
+      <div class="px-4 py-5 my-5 text-center">
+         <h1 class="display-5 fw-bold"><u>Study+</u></h1>
+         <br>
+         <div class="col-lg-6 mx-auto">
+            <p class="lead mb-4">
+               Watch educational videos produced by our top-notch educators, study with flashcards, and test your knowledge with fun quizzes. <br>Register now and upgrade yourself.
+            </p>
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+               <a href="pages/studentLogin.html" class="btn btn-lg btn-primary fw-bold">Student login</a>
+               <a href="pages/teacherLogin.html" class="btn btn-lg btn-primary fw-bold">Teacher login</a>
+            </div>
+         </div>
+      </div>
+
+
+      <!-- Footer -->
+      <div class="container">
+         <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+            <p class="col-md-4 mb-0">© 2022 Tony</p>
+            <ul class="nav col-md-4 justify-content-end">
+               <li class="nav-item"><a href="index.html" class="nav-link px-2">Home</a></li>
+               <li class="nav-item"><a href="pages/about.html" class="nav-link px-2">About</a></li>
+            </ul>
+         </footer>
+      </div>
+
+
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+
+   </body>
 
 </html>
